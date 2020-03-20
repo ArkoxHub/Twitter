@@ -81,6 +81,18 @@ body {
     font-weight: bold;
 }
 
+.btn-tweet:focus {
+    outline: none;
+}
+
+.hidden {
+    display: none;
+}
+
+.hidden:focus {
+    outline: none;
+}
+
 .btn-tweet:hover {
     transition: all 300ms;
     cursor: pointer;
@@ -121,14 +133,14 @@ body {
     margin-left: 20px;
 }
 
-#container #start-image {
-    width: 36px;
+#container #star-image {
+    width: 50px;
     margin-right: 25px;
 }
 
 /* TWEET CLIENT */
 #tweet-client {
-    height: 150px;
+    height: 120px;
 }
 
 #write-tweet {
@@ -137,18 +149,17 @@ body {
     outline: none;
     color: white;
     width: 472px;
-    height: 67;
-    font-size: 19px;
+    font-size: 20px;
     resize: none;
     margin-left: 10px;
 }
 
 .self-img {
-    border-radius: 60%;
-    min-width: 54px;
-    max-width: 54px;
-    max-height: 54px;
-    min-height: 54px;
+    border-radius: 100%;
+    min-width: 50px;
+    max-width: 50px;
+    max-height: 50px;
+    min-height: 50px;
 }
 
 #tweet-options .btn-tweet {
@@ -162,7 +173,7 @@ body {
     flex-flow: row wrap;
     margin-top: 20px;
     margin-left: 16px;
-    margin-bottom: 20px;
+    margin-bottom: 10px;
 }
 
 #tweet-options {
@@ -173,20 +184,25 @@ body {
 #tweet-options ul {
     display: flex;
     flex-flow: row wrap;
-    margin-left: 20px;
+    margin-left: 74px;
 }
 
 #tweet-options ul li {
     color: white;
-    font-size: 22px;
+    font-size: 20px;
     color: var(--button-color);
-    font-weight: lighter;
     list-style: none;
-    margin-right: 20px;
+    width: 40px;
+    height: 40px;
+    text-align: center;
+    line-height: 40px;
+    border-radius: 3em;
 }
 
 #tweet-options ul li:hover {
+    transition: all 100ms;
     cursor: pointer;
+    background-color: rgba(29, 161, 242, 0.15);
 }
 
 #tweet-options button {
@@ -197,6 +213,13 @@ body {
 .tweet {
     border: 1px solid var(--border-color);
     color: white;
+    padding-left: 16px;
+    padding-top: 7px;
+}
+
+.tweet:hover {
+    background-color: var(--main-hover-color);
+    cursor: pointer;
 }
 
 .profile {
@@ -209,7 +232,6 @@ body {
 
 .tweet img:hover {
     cursor: pointer;
-    box-shadow: 1px 1px 1px 0px #cccccc;
 }
 
 .tweet .user-name {
@@ -220,7 +242,7 @@ body {
 
 .tweet .tweetted {
     color: white;
-    margin-left: 65px;
+    margin-left: 61px;
     margin-right: 20px;
     margin-top: -17px;
 }
@@ -239,10 +261,31 @@ body {
 
 .tweet i {
     color: rgb(146, 145, 145);
-    font-weight: 600;
-    background-color: transparent;
+    text-align: center;
+    height: 40px;
+    width: 40px;
+    line-height: 40px;
 }
 
+.fa-comment:hover,
+.fa-upload:hover {
+    color: var(--button-color);
+}
+
+.fa-retweet:hover {
+    color: rgb(79, 221, 79);
+    background-color: rgba(8, 124, 8, 0.50);
+}
+
+.fa-heart:hover {
+    color: red;
+    background-color: rgba(255, 0, 0, 0.50);
+}
+
+.tweet i:hover {
+    background-color: var(--main-li-hover-color);
+    border-radius: 2em;
+}
 
 /* ASIDE */
 #aside {
@@ -336,6 +379,13 @@ body {
     border-bottom: none;
 }
 
+.card-tt:hover {
+    cursor: pointer;
+    background-color:#1b3041;
+    box-shadow: inset;
+    transition: all 300ms;
+}
+
 /* FIN ASIDE */
 
 /* FOOTER */
@@ -359,4 +409,164 @@ body {
 #footer ul li a:hover {
     border-bottom: 1px solid #ccc;
     color: #ccc;
+}
+
+/* BUTTON SCROLL */
+#scroll-top {
+    width: 50px;
+    height: 50px;
+    text-align: center;
+    line-height: 50px;
+    display: block;
+    position: fixed;
+    margin-left: 95%;
+    margin-top: 50%;
+    opacity: 0.8;
+}
+
+#scroll-top #scroll-button {
+    display: none;
+    height: 100%;
+    width: 100%;
+    background-color: rgb(58, 57, 57);
+    border-radius: 0.5em;
+    border: none;
+    font-size: 20px;
+    color: rgba(238, 229, 229, 0.863);
+    z-index: 99;
+}
+
+#scroll-top #scroll-button:hover {
+    cursor: pointer;
+    background-color: var(--button-color);
+    color: white;
+    box-shadow: 0px 0px 15px var(--button-color);
+    opacity: 1;
+}
+
+#scroll-top #scroll-button:focus {
+    outline: none;
+}
+
+
+
+@media only screen and (min-width: 2550px) {
+
+    #scroll-top {
+        margin-top: 45%;
+    }
+}
+
+@media only screen and (max-width: 1500px) {
+
+    #scroll-top {
+        margin-top: 60%;
+    }
+}
+
+@media only screen and (max-width: 1200px) {
+
+    #scroll-top {
+        margin-top: 70%;
+    }
+}
+
+@media only screen and (max-width: 1100px) {
+
+    #scroll-top {
+        display: none;
+    }
+}
+
+@media only screen and (max-width: 1075px) {
+
+    #header {
+        align-items: center;
+        flex-grow: 1;
+        padding-right: 0px;
+    }
+
+    .menu-link > span {
+        display: none;
+    }
+
+    #menu ul li {
+        text-align: center;
+        width: 35px;
+        height: 35px;
+        line-height: 35px;
+    }
+
+    #menu ul li i {
+        width: 35px;
+    }
+
+    #twittear {
+        width: 60px;
+        height: 60px;
+    }
+
+    .btn-tweet {
+        display: none;
+    }
+
+    .hidden {
+        display: block;
+        margin-left: 17px;
+    }
+
+    #aside {
+        display: none;
+    }
+}
+
+@media only screen and (max-width: 950px) {
+    #header {
+        flex-grow: 0.1;
+    }
+}
+
+@media only screen and (max-width: 640px) {
+    
+    #tweet-client {
+        display: none;
+    }
+
+    #header {
+        order: 1;
+        width: 100%;
+    }
+
+    #menu {
+        width: 100%;
+        border-top: 1px solid var(--border-color);
+    }
+
+    #menu ul {
+        display: flex;
+        flex-flow: row wrap;
+        justify-content: space-between;
+        width: 100% !important;
+        padding: 15px;
+    }
+
+    #menu ul li {
+        flex-grow: 1;
+        margin: 0px;
+        padding: 0px;
+    }
+
+    #menu ul li:nth-child(5),
+    #menu ul li:nth-child(6),
+    #menu ul li:nth-child(7),
+    #menu ul li:nth-child(8),
+    #menu ul li:nth-child(9),
+    .btn-tweet {
+        display: none;
+    }
+
+    .section {
+        width: 100%;
+        order: 0;
+    }
 }
