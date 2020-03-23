@@ -457,6 +457,13 @@ body {
     }
 }
 
+@media only screen and (max-width: 1550px) {
+
+    #write-tweet {
+        width: 380px;
+    }
+}
+
 @media only screen and (max-width: 1500px) {
 
     #scroll-top {
@@ -506,7 +513,7 @@ body {
         height: 60px;
     }
 
-    .btn-tweet {
+    #header .btn-tweet {
         display: none;
     }
 
