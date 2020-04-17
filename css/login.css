@@ -1,0 +1,154 @@
+/* Declare variables */
+
+:root {
+    --background-mainColor: #15202b;
+    --background_Inputs: #192734;
+    --letter_Color: #ffffff;
+    --letter_Inputs: #887c65;
+    --button_Color: #1da1f2;
+    --button_Color_Hover: rgb(18, 87, 214);;
+}
+
+/* Generals */
+
+* {
+    margin: 0px;
+    padding: 0px;
+    font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Ubuntu, "Helvetica Neue", sans-serif;
+    color: var(--letter_Color);
+}
+
+body {
+    background-color: var(--background-mainColor);
+}
+
+.container {
+    display: flex;
+    flex-flow: wrap row;
+    justify-content: center;
+}
+
+/* Header */
+#header {
+    display: flex;
+    flex-flow: wrap row;
+    justify-content: center;
+
+    width: 100%;
+    margin-top: 30px;
+}
+
+.title {
+    color: white;
+    margin-top: 50px;
+    font-size: 30px;
+}
+
+.logo {
+    width: 100%;
+    color: white;
+    font-size: 80px;
+    text-align: center;
+}
+
+/* Section Login Form */
+#section {
+    margin-top: 30px;
+    width: 35%;
+}
+#loginForm {
+    display: flex;
+    flex-flow: wrap row;
+    justify-content: center;
+}
+
+#loginForm label {
+    width: 100%;
+    text-align: left;
+    margin-top: 20px;
+    margin-bottom: 10px;
+    font-size: 20px;
+    color: var(--button_Color);
+}
+
+#loginForm input {
+    display: block;
+    width: 100%;
+    height: 55px;
+    border: 0;
+    border-bottom: 1px solid var(--letter_Color);
+}
+
+#loginForm input[type="text"],
+#loginForm input[type="password"] {
+    color: var(--letter_Color);
+    background-color: var(--background_Inputs);
+    font-size: 20px;
+}
+
+#loginForm input[type="text"]:focus,
+#loginForm input[type="password"]:focus {
+    outline: none;
+    border-bottom: 3px solid var(--letter_Color);
+    transition: all 100ms;
+}
+
+#loginForm input[type="submit"] {
+    color: white;
+    background-color: var(--button_Color);
+    border: none;
+    height: 60px;
+    border-radius: 2em;
+    font-size: 20px;
+    font-weight: bolder;
+    margin-top: 60px;
+}
+
+#loginForm input[type="submit"]:hover {
+    transition: all 300ms;
+    cursor: pointer;
+    background-color: var(--button_Color_Hover);
+    box-shadow: 1px 1px 3px rgb(11, 34, 78);
+}
+
+#loginForm input[type="submit"]:focus {
+    outline: 0;
+}
+
+/* Options */
+#options {
+    margin-top: 40px;
+}
+
+#listOptions {
+    display: flex;
+    flex-flow: wrap row;
+    justify-content: space-evenly;
+}
+
+#listOptions li {
+    margin-left: 20px;
+    list-style: none;
+}
+
+#listOptions li a {
+    text-decoration: none;
+    color: var(--button_Color);
+    font-size: 19px;
+}
+
+#listOptions li a:hover {
+    text-decoration: underline;
+}
+
+/* Alert */
+.alert {
+    margin-top: 10px;
+}
+
+.textAlert {
+    color: red !important;
+    font-size: 18px;
+}
+
+/* Media Queries */

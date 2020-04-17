@@ -4,13 +4,17 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Inici / Twitter</title>
+    <title>Inicio / Twitter</title>
     <!-- FAVICON -->
-    <link rel="icon" href="./assets/img/twitter-blue.png">
+    <link rel="icon" href="./assets/img/newfavicon.png">
     <!-- My CSS -->
     <link rel="stylesheet" href="./css/styles.css">
     <!-- Font Awesome -->
     <script src="https://kit.fontawesome.com/b400a47616.js" crossorigin="anonymous"></script>
+    <!-- Moment JS -->
+    <script src="./scripts/Moment/moment.min.js"></script>
+    <!-- JQUERY -->
+    <script src="./scripts/jQuery/jquery-3.4.1.js"></script>
     <!-- My Script-->
     <script src="./scripts/main.js"></script>
 </head>
@@ -22,15 +26,21 @@
         <header id="header">
             <nav id="menu">
                 <ul>
-                    <li><a href="#"><i class="fab fa-twitter menu-icon"></i></a></li>
+                    <li><a href="./index.html"><i class="fab fa-twitter menu-icon"></i></a></li>
                     <li><a href="#" class="menu-link"><i class="fas fa-home menu-icon"></i><span>Inicio</span></a></li>
-                    <li><a href="#" class="menu-link"><i class="fas fa-hashtag menu-icon"></i><span>Explorar</span></a></li>
-                    <li><a href="#" class="menu-link"><i class="far fa-bell menu-icon"></i><span>Notificaciones</span></a></li>
-                    <li><a href="#" class="menu-link"><i class="far fa-envelope menu-icon"></i><span>Mensajes</span></a></li>
-                    <li><a href="#" class="menu-link"><i class="far fa-bookmark menu-icon"></i><span>Guardados</span></a></li>
-                    <li><a href="#" class="menu-link"><i class="far fa-list-alt menu-icon"></i><span>Listas</span></a></li>
+                    <li><a href="#" class="menu-link"><i class="fas fa-hashtag menu-icon"></i><span>Explorar</span></a>
+                    </li>
+                    <li><a href="#" class="menu-link"><i
+                                class="far fa-bell menu-icon"></i><span>Notificaciones</span></a></li>
+                    <li><a href="#" class="menu-link"><i class="far fa-envelope menu-icon"></i><span>Mensajes</span></a>
+                    </li>
+                    <li><a href="#" class="menu-link"><i
+                                class="far fa-bookmark menu-icon"></i><span>Guardados</span></a></li>
+                    <li><a href="#" class="menu-link"><i class="far fa-list-alt menu-icon"></i><span>Listas</span></a>
+                    </li>
                     <li><a href="#" class="menu-link"><i class="fas fa-user menu-icon"></i><span>Perfil</span></a></li>
-                    <li><a href="#" class="menu-link"><i class="fas fa-ellipsis-h menu-icon"></i><span>Más opciones</span></a></li>
+                    <li><a href="#" class="menu-link"><i class="fas fa-ellipsis-h menu-icon"></i><span>Más
+                                opciones</span></a></li>
                     <button id="twittear" class="btn-tweet">Twittear</button>
                     <button id="twittear" class="btn-tweet hidden"><i class="fas fa-feather"></i></button>
                 </ul>
@@ -52,9 +62,10 @@
                 <div id="tweet-home">
                     <div id="tweet-area">
                         <img class="self-img" src="./assets/img/72efegBj_400x400.jpg" alt="foto-perfil">
-                        <form id="form-tweet" action="#" method="GET">
-                            <textarea id="write-tweet" placeholder="¿Qué está pasando?"></textarea>
-                        </form>
+                        <form id="form-tweet" method="POST">
+                            <textarea id="write-tweet" placeholder="¿Qué está pasando?" maxlength="240"></textarea>
+                            <input type="text" name="nickname" id="nickname" value="Arkox" hidden>
+
                     </div>
                     <div id="tweet-options">
                         <ul>
@@ -63,7 +74,9 @@
                             <li><i class="fas fa-align-left"></i></li>
                             <li><i class="far fa-smile"></i></li>
                         </ul>
-                        <button class="btn-tweet">Twittear</button>
+                        <span id="tweetLength"></span>
+                        <input id="submitTweet" type="submit" class="btn-tweet" value="Twittear" disabled />
+                        </form>
                     </div>
                 </div>
             </div>
@@ -73,170 +86,27 @@
             <div class="space-arround" style="width: 100%; height: 9px; background-color: #253342;"></div>
 
             <!-- ARTICLE TWEET -->
-            <article class="tweet">
-                <div class="profile">
-                    <img class="self-img" src="./assets/img/61ri1JvQEJL.png" alt="perfil">
-                    <p class="user-name">Popeye @dawae · 56s</p>
-                </div>
-                <p class="tweetted">Do you know da wae?</p>
-                <ul>
-                    <li><i class="far fa-comment"></i></li>
-                    <li><i class="fas fa-retweet"></i></li>
-                    <li><i class="far fa-heart"></i></li>
-                    <li><i class="fas fa-upload"></i></li>
-                </ul>
-            </article>
-            <article class="tweet">
-                <div class="profile">
-                    <img class="self-img" src="./assets/img/61ri1JvQEJL.png" alt="perfil">
-                    <p class="user-name">Popeye @dawae · 56s</p>
-                </div>
-                <p class="tweetted">Lorem, ipsum dolor sit amet consectetur adipisicing elit. Quia illum numquam dolor
-                    adipisci tempore? Molestiae sit laboriosam aut, optio nobis nisi perspiciatis corporis quae!
-                    Veritatis, accusantium, eveniet quo tempora perferendis ratione sunt adipisci quidem debitis,
-                    quaerat reprehenderit distinctio voluptatum minus. Blanditiis, perferendis ipsam doloribus rerum
-                    voluptatibus quam aperiam earum aliquid.</p>
-                <ul>
-                    <li><i class="far fa-comment"></i></li>
-                    <li><i class="fas fa-retweet"></i></li>
-                    <li><i class="far fa-heart"></i></li>
-                    <li><i class="fas fa-upload"></i></li>
-                </ul>
-            </article>
-            <article class="tweet">
-                <div class="profile">
-                    <img class="self-img" src="./assets/img/61ri1JvQEJL.png" alt="perfil">
-                    <p class="user-name">Popeye @dawae · 56s</p>
-                </div>
-                <p class="tweetted">Lorem ipsum, dolor sit amet consectetur adipisicing elit. Ipsam vel quasi explicabo,
-                    vero provident in odio maxime asperiores labore officiis laboriosam fugiat culpa fuga error,
-                    deleniti ea accusamus quia. Quidem ipsum a quae! Odit placeat ex incidunt inventore amet voluptatem
-                    facilis, ipsum tempore, dolor quaerat sit nobis dignissimos animi. Quos laboriosam veniam quae
-                    exercitationem tenetur possimus iste corporis similique est voluptatem, deserunt sequi earum
-                    delectus quas illum non modi molestiae, nostrum corrupti eius vero aperiam excepturi. Excepturi,
-                    inventore ut aliquid quisquam soluta consequatur rem magni fugit dolorum distinctio dolor tenetur
-                    voluptate porro doloremque optio, aperiam omnis nam. Nisi, nulla omnis!
-                </p>
-                <ul>
-                    <li><i class="far fa-comment"></i></li>
-                    <li><i class="fas fa-retweet"></i></li>
-                    <li><i class="far fa-heart"></i></li>
-                    <li><i class="fas fa-upload"></i></li>
-                </ul>
-            </article>
-            <article class="tweet">
-                <div class="profile">
-                    <img class="self-img" src="./assets/img/61ri1JvQEJL.png" alt="perfil">
-                    <p class="user-name">Popeye @dawae · 56s</p>
-                </div>
-                <p class="tweetted">Do you know da wae?</p>
-                <ul>
-                    <li><i class="far fa-comment"></i></li>
-                    <li><i class="fas fa-retweet"></i></li>
-                    <li><i class="far fa-heart"></i></li>
-                    <li><i class="fas fa-upload"></i></li>
-                </ul>
-            </article>
-            <article class="tweet">
-                <div class="profile">
-                    <img class="self-img" src="./assets/img/61ri1JvQEJL.png" alt="perfil">
-                    <p class="user-name">Popeye @dawae · 56s</p>
-                </div>
-                <p class="tweetted">Lorem, ipsum dolor sit amet consectetur adipisicing elit. Quia illum numquam dolor
-                    adipisci tempore? Molestiae sit laboriosam aut, optio nobis nisi perspiciatis corporis quae!
-                    Veritatis, accusantium, eveniet quo tempora perferendis ratione sunt adipisci quidem debitis,
-                    quaerat reprehenderit distinctio voluptatum minus. Blanditiis, perferendis ipsam doloribus rerum
-                    voluptatibus quam aperiam earum aliquid.</p>
-                <ul>
-                    <li><i class="far fa-comment"></i></li>
-                    <li><i class="fas fa-retweet"></i></li>
-                    <li><i class="far fa-heart"></i></li>
-                    <li><i class="fas fa-upload"></i></li>
-                </ul>
-            </article>
-            <article class="tweet">
-                <div class="profile">
-                    <img class="self-img" src="./assets/img/61ri1JvQEJL.png" alt="perfil">
-                    <p class="user-name">Popeye @dawae · 56s</p>
-                </div>
-                <p class="tweetted">Lorem ipsum, dolor sit amet consectetur adipisicing elit. Ipsam vel quasi explicabo,
-                    vero provident in odio maxime asperiores labore officiis laboriosam fugiat culpa fuga error,
-                    deleniti ea accusamus quia. Quidem ipsum a quae! Odit placeat ex incidunt inventore amet voluptatem
-                    facilis, ipsum tempore, dolor quaerat sit nobis dignissimos animi. Quos laboriosam veniam quae
-                    exercitationem tenetur possimus iste corporis similique est voluptatem, deserunt sequi earum
-                    delectus quas illum non modi molestiae, nostrum corrupti eius vero aperiam excepturi. Excepturi,
-                    inventore ut aliquid quisquam soluta consequatur rem magni fugit dolorum distinctio dolor tenetur
-                    voluptate porro doloremque optio, aperiam omnis nam. Nisi, nulla omnis!
-                </p>
-                <ul>
-                    <li><i class="far fa-comment"></i></li>
-                    <li><i class="fas fa-retweet"></i></li>
-                    <li><i class="far fa-heart"></i></li>
-                    <li><i class="fas fa-upload"></i></li>
-                </ul>
-            </article>
-            <article class="tweet">
-                <div class="profile">
-                    <img class="self-img" src="./assets/img/61ri1JvQEJL.png" alt="perfil">
-                    <p class="user-name">Popeye @dawae · 56s</p>
-                </div>
-                <p class="tweetted">Do you know da wae?</p>
-                <ul>
-                    <li><i class="far fa-comment"></i></li>
-                    <li><i class="fas fa-retweet"></i></li>
-                    <li><i class="far fa-heart"></i></li>
-                    <li><i class="fas fa-upload"></i></li>
-                </ul>
-            </article>
-            <article class="tweet">
-                <div class="profile">
-                    <img class="self-img" src="./assets/img/61ri1JvQEJL.png" alt="perfil">
-                    <p class="user-name">Popeye @dawae · 56s</p>
-                </div>
-                <p class="tweetted">Lorem, ipsum dolor sit amet consectetur adipisicing elit. Quia illum numquam dolor
-                    adipisci tempore? Molestiae sit laboriosam aut, optio nobis nisi perspiciatis corporis quae!
-                    Veritatis, accusantium, eveniet quo tempora perferendis ratione sunt adipisci quidem debitis,
-                    quaerat reprehenderit distinctio voluptatum minus. Blanditiis, perferendis ipsam doloribus rerum
-                    voluptatibus quam aperiam earum aliquid.</p>
-                <ul>
-                    <li><i class="far fa-comment"></i></li>
-                    <li><i class="fas fa-retweet"></i></li>
-                    <li><i class="far fa-heart"></i></li>
-                    <li><i class="fas fa-upload"></i></li>
-                </ul>
-            </article>
-            <article class="tweet">
-                <div class="profile">
-                    <img class="self-img" src="./assets/img/61ri1JvQEJL.png" alt="perfil">
-                    <p class="user-name">Popeye @dawae · 56s</p>
-                </div>
-                <p class="tweetted">Do you know da wae?</p>
-                <ul>
-                    <li><i class="far fa-comment"></i></li>
-                    <li><i class="fas fa-retweet"></i></li>
-                    <li><i class="far fa-heart"></i></li>
-                    <li><i class="fas fa-upload"></i></li>
-                </ul>
-            </article>
-            <article class="tweet">
-                <div class="profile">
-                    <img class="self-img" src="./assets/img/61ri1JvQEJL.png" alt="perfil">
-                    <p class="user-name">Popeye @dawae · 56s</p>
-                </div>
-                <p class="tweetted">Lorem, ipsum dolor sit amet consectetur adipisicing elit. Quia illum numquam dolor
-                    adipisci tempore? Molestiae sit laboriosam aut, optio nobis nisi perspiciatis corporis quae!
-                    Veritatis, accusantium, eveniet quo tempora perferendis ratione sunt adipisci quidem debitis,
-                    quaerat reprehenderit distinctio voluptatum minus. Blanditiis, perferendis ipsam doloribus rerum
-                    voluptatibus quam aperiam earum aliquid.</p>
-                <ul>
-                    <li><i class="far fa-comment"></i></li>
-                    <li><i class="fas fa-retweet"></i></li>
-                    <li><i class="far fa-heart"></i></li>
-                    <li><i class="fas fa-upload"></i></li>
-                </ul>
-            </article>
-            <!-- Fin Tweets -->
-
+            <div id="articles">
+                <!-- Tweets -->
+                <!-- Example -->
+                <!-- <article class="tweet">
+                    <div class="profile">
+                        <img class="self-img" src="./assets/img/61ri1JvQEJL.png" alt="perfil">
+                        <p class="user-name">Popeye · </p>
+                        <span class="subtext">@Arkox 1 day ago</span>
+                        <span><i class="fas fa-times"></i></span>
+                    </div>
+                    <p class="tweetted">Do you know da wae?</p>
+                    <ul>
+                        <li><i class="far fa-comment"></i></li>
+                        <li><i class="fas fa-retweet"></i></li>
+                        <li><i class="far fa-heart"></i></li>
+                        <li><i class="fas fa-upload"></i></li>
+                    </ul>
+                </article> -->
+                <!-- End Example -->
+                <!-- Fin Tweets -->
+            </div>
         </section>
         <!-- Fin zona central -->
 

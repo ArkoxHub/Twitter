@@ -4,6 +4,7 @@
     --main-li-hover-color: rgba(29, 161, 242, 0.1);
     --button-color: rgb(29, 161, 242);
     --border-color: rgb(56, 68, 77);
+    --gray-main-color: rgb(138, 125, 125);
 }
 
 * {
@@ -166,6 +167,12 @@ body {
     width: 100px;
     height: 40px;
     font-size: 15px;
+    margin-right: 20px;
+}
+
+#tweet-options .btn-tweet:disabled {
+    opacity: 0.4;
+    cursor: default;
 }
 
 #tweet-area {
@@ -205,6 +212,11 @@ body {
     background-color: rgba(29, 161, 242, 0.15);
 }
 
+#tweet-options span {
+    margin-top: 10px;
+    font-weight: 700;
+}
+
 #tweet-options button {
     margin-right: 25px;
 }
@@ -222,7 +234,7 @@ body {
     cursor: pointer;
 }
 
-.profile {
+.tweet .profile {
     display: flex;
 }
 
@@ -234,7 +246,8 @@ body {
     cursor: pointer;
 }
 
-.tweet .user-name {
+.tweet .user-name,
+.tweet .subtext {
     font-weight: bold;
     margin-top: 10px;
     margin-left: 10px;
@@ -267,24 +280,43 @@ body {
     line-height: 40px;
 }
 
-.fa-comment:hover,
-.fa-upload:hover {
+.tweet i:hover {
+    background-color: var(--main-li-hover-color);
+    border-radius: 2em;
+}
+
+.tweet .fa-comment:hover,
+.tweet .fa-upload:hover {
     color: var(--button-color);
 }
 
-.fa-retweet:hover {
+.tweet .fa-retweet:hover {
     color: rgb(79, 221, 79);
     background-color: rgba(8, 124, 8, 0.50);
 }
 
-.fa-heart:hover {
+.tweet .fa-heart:hover {
     color: red;
-    background-color: rgba(255, 0, 0, 0.50);
+    background-color: rgba(255, 0, 0, 0.20);
 }
 
-.tweet i:hover {
-    background-color: var(--main-li-hover-color);
-    border-radius: 2em;
+.profile span:last-child  {
+    margin-left: auto;
+}
+
+.profile .subtext {
+    color: var(--gray-main-color);
+    font-weight: normal;
+}
+
+.tweet .fa-times {
+    color: red;
+    opacity: 0.6;
+}
+
+.tweet .fa-times:hover {
+    color: red;
+    opacity: 1;
 }
 
 /* ASIDE */

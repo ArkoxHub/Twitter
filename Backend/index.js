@@ -8,8 +8,12 @@ const uri = 'mongodb://localhost:27017/Twitter';
 
 mongoose.connect(uri, {useNewUrlParser: true});
 
+/**
+ * Listeners conectividad de Mongoose
+ */
 var db = mongoose.connection;
 db.on('error', console.error.bind(console, 'Connection error:'));
+// Servidor corriendo
 db.once('open', function () {
     console.log('MongoDB connected!');
 

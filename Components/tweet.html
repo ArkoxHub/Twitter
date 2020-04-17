@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Inicio / Twitter</title>
+    <!-- FAVICON -->
+    <link rel="icon" href="../assets/img/newfavicon.png">
+    <!-- My CSS -->
+    <link rel="stylesheet" href="../css/styles.css">
+    <!-- Font Awesome -->
+    <script src="https://kit.fontawesome.com/b400a47616.js" crossorigin="anonymous"></script>
+    <!-- Moment JS -->
+    <script src="../scripts/Moment/moment.min.js"></script>
+    <!-- JQUERY -->
+    <script src="../scripts/jQuery/jquery-3.4.1.js"></script>
+    <!-- My Script-->
+    <script src="../scripts/tweet.js"></script>
+</head>
+
+<body>
+
+    <!-- Barra lateral navegación -->
+    <div id="content">
+        <header id="header">
+            <nav id="menu">
+                <ul>
+                    <li><a href="#"><i class="fab fa-twitter menu-icon"></i></a></li>
+                    <li><a href="#" class="menu-link"><i class="fas fa-home menu-icon"></i><span>Inicio</span></a></li>
+                    <li><a href="#" class="menu-link"><i class="fas fa-hashtag menu-icon"></i><span>Explorar</span></a>
+                    </li>
+                    <li><a href="#" class="menu-link"><i
+                                class="far fa-bell menu-icon"></i><span>Notificaciones</span></a></li>
+                    <li><a href="#" class="menu-link"><i class="far fa-envelope menu-icon"></i><span>Mensajes</span></a>
+                    </li>
+                    <li><a href="#" class="menu-link"><i
+                                class="far fa-bookmark menu-icon"></i><span>Guardados</span></a></li>
+                    <li><a href="#" class="menu-link"><i class="far fa-list-alt menu-icon"></i><span>Listas</span></a>
+                    </li>
+                    <li><a href="#" class="menu-link"><i class="fas fa-user menu-icon"></i><span>Perfil</span></a></li>
+                    <li><a href="#" class="menu-link"><i class="fas fa-ellipsis-h menu-icon"></i><span>Más
+                                opciones</span></a></li>
+                    <button id="twittear" class="btn-tweet">Twittear</button>
+                    <button id="twittear" class="btn-tweet hidden"><i class="fas fa-feather"></i></button>
+                </ul>
+            </nav>
+        </header>
+        <!-- Fin barra lateral navegación -->
+
+        <!-- Zona central -->
+        <section id="container">
+            <!-- Barra inicio fixed -->
+            <div class="inicio">
+                <p><a href="../index.html" style="color: white; text-decoration: none"><i class="fas fa-arrow-left"
+                            style="margin-right: 20px; color: dodgerblue"></i>Twittear</p>
+                <img id="star-image" src="../assets/img/start-transparent.png" alt="star">
+            </div>
+            <!-- Fin inicio fixed -->
+            <div id="articles">
+                <!-- Tweet -->
+            </div>
+        </section>
+        <!-- Fin zona central -->
+
+        <!-- Aside zona izquierda -->
+        <aside id="aside">
+            <form method="GET" action="#">
+                <i id="search-icon" class="fas fa-search search-Icon"></i>
+                <input type="text" placeholder="Buscar en Twitter">
+            </form>
+
+            <!-- Tendring Topic -->
+            <div id="trending-topic">
+                <div id="trending-title">
+                    <h2>Tendencias de Spain</h2>
+                </div>
+                <div id="trending-tt">
+                    <div class="card-tt">
+                        <p class="category-tt">1 · Tendencias</p>
+                        <p class="hastag">#Coronavirus</p>
+                        <p class="total-tweets">44,9 mil Tweets</p>
+                    </div>
+                    <div class="card-tt">
+                        <p class="category-tt">1 · Tendencias</p>
+                        <p class="hastag">#Coronavirus</p>
+                        <p class="total-tweets">44,9 mil Tweets</p>
+                    </div>
+                    <div class="card-tt">
+                        <p class="category-tt">1 · Tendencias</p>
+                        <p class="hastag">#Coronavirus</p>
+                        <p class="total-tweets">44,9 mil Tweets</p>
+                    </div>
+                    <div class="card-tt">
+                        <p class="category-tt">1 · Tendencias</p>
+                        <p class="hastag">#Coronavirus</p>
+                        <p class="total-tweets">44,9 mil Tweets</p>
+                    </div>
+                    <div class="card-tt">
+                        <p class="category-tt">1 · Tendencias</p>
+                        <p class="hastag">#Coronavirus</p>
+                        <p class="total-tweets">44,9 mil Tweets</p>
+                    </div>
+                </div>
+            </div>
+            <!-- Fin Aside zona izquierda -->
+
+            <!-- FOOTER -->
+            <footer id="footer">
+                <div>
+                    <ul>
+                        <li><a href="#">Términos</a></li>
+                        <li><a href="#">Política de privacidad</a></li>
+                        <li><a href="#">Cookies</a></li>
+                        <li><a href="#">Información de anuncios</a></li>
+                        <li><a href="#">Más opciones</a></li>
+                        <li><a href="#">&copy; Adri all rights reserved</a></li>
+                    </ul>
+                </div>
+            </footer>
+        </aside>
+
+        <div id="scroll-top">
+            <button id="scroll-button" title="Scroll Top"><i class="fas fa-chevron-up"></i></button>
+        </div>
+    </div>
+
+</body>
+
+</html>

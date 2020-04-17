@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Twitter: Descubre el momento</title>
+    <link rel="icon" href="../assets/img/newfavicon.png">
+    <!-- Font Awesome 5.0-->
+    <link type="text/css" href="../assets/fonts/fontawesome-free-5.13.0-web/css/all.css" rel="stylesheet">
+    <!-- My CSS -->
+    <link type="text/css" href="../css/login.css" rel="stylesheet">
+    <!-- jQuery -->
+    <script src="../scripts/jQuery/jquery-3.4.1.js"></script>
+    <!-- My Script -->
+    <script src="../scripts/login.js"></script>
+</head>
+
+<body>
+    <div class="container">
+        <!-- Header -->
+        <header id="header">
+            <i class="fab fa-twitter logo"></i>
+            <h1 class="title">Iniciar sesión en Twitter</h1>
+        </header>
+        <!-- End Header -->
+
+        <!-- Section -->
+        <section id="section">
+            <!-- Login -->
+            <div id="login">
+                <form id="loginForm" method="post" action="#">
+                    <label for="username">Nombre de usuario</label>
+                    <input type="text" name="username" id="username">
+
+                    <label for="password">Contraseña</label>
+                    <input type="password" name="password" id="password">
+
+                    <input id="submitForm" type="submit" class="form-button" value="Iniciar sesión">
+                </form>
+            </div>
+            <!-- End Login -->
+            <div id="options">
+                <ul id="listOptions">
+                    <li><a href="#">¿Olvidaste la contraseña?</a></li>
+                    <li><a href="#">Regístrate ahora</a></li>
+                </ul>
+            </div>
+        </section>
+        <!-- End Section -->
+    </div>
+</body>
+
+</html>
