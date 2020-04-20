@@ -82,7 +82,7 @@ var userController = {
     },
 
     /**
-     * Method: GET
+     * Method: POST
      * READ user
      * Se obteiene el valor de un usuario pasado en la URL y buscamos la única 
      * coincidencia en la colección "users" de la base de datos
@@ -91,27 +91,47 @@ var userController = {
      * @returns El usuario encontrado en formato json de la collección de datos
      */
     getUserByUser: function (req, res) {
-        var user_Name = req.params.user;
+        var user_Name = req.body.user;
+        var user_Password = req.body.password;
 
-        if (validator.isEmpty(user_Name)) {
+        if (validator.isEmpty(user_Name) || validator.isEmpty(user_Password)) {
             res.status(400).send({
                 status: 'Failed',
                 message: 'No se ha pasado correctamente el usuario por parámetro'
             });
         } else {
             user_Model.find({ user: user_Name }, function (err, user_Response) {
-                if (!user_Response[0] || err) {
-                    return res.status(500).send({
-                        status: 'Failed',
-                        message: 'No se ha encontrado ningún usuario con este nombre'
+                if (!user_Response[0]) {
+                    return res.status(200).send({
+                        status: 'User',
+                        message: 'No se ha encontrado ningún usuario con este nombre',
+                        user: user_Response
                     });
                 }
 
-                return res.status(200).send({
-                    status: 'Success',
-                    message: 'Se ha encontrado un usuario',
-                    user: user_Response
-                });
+                if (err) {
+                    return res.status(500).send({
+                        status: 'Failed',
+                        message: 'Error en la Base de Datos, por favor inténtelo de nuevo más tarde.'
+                    });
+                }
+
+                if (user_Response[0]) {
+                    if (user_Response[0].password1 === user_Password) {
+                        return res.status(200).send({
+                            status: 'Success',
+                            message: 'Usuario encontrado',
+                            user: user_Response
+
+                        });
+                    } else {
+                        return res.status(200).send({
+                            status: 'Password',
+                            message: 'La contraseña introducida no coincide',
+                            user: null
+                        });
+                    }
+                }
             });
         }
     },

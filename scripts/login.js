@@ -62,20 +62,40 @@ window.onload = function () {
 
     function loginUser(user, password) {
         $.ajax({
-            method: 'get',
-            url: 'http://localhost:3000/user/' + user,
-            datatype: 'json',
+            method: 'post',
+            url: 'http://localhost:3000/user/login',
             data: {
-                userValue: user,
-                passwordValue: password
+                user: user,
+                password: password
             },
+            datatype: 'json',
             success: processResponse,
             error: showError
         });
     }
 
-    function processResponse(data) {
-        console.log(data)
+    /**
+     * 
+     * @param {*} data 
+     */
+    function processResponse(data, status, xhr) {
+        if (data.status === 'Success') {
+            console.log('Login correcto');
+            console.log(xhr.getResponseHeader('Set-Cookie'));
+            console.log(document.cookie)
+        }
+
+        if (data.status === 'User') {
+            var username = document.getElementById('username');
+            var error = createAlertError('Usuario incorrecto');
+            insertAfter(error, username);
+        }
+
+        if (data.status === 'Password') {
+            var password = document.getElementById('password');
+            var error = createAlertError('Contraseña incorrecta');
+            insertAfter(error, password);
+        }
     }
 
     function showError(jqXHR, statusText, error) {

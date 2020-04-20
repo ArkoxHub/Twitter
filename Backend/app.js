@@ -22,6 +22,7 @@ app.use(express.urlencoded({ extended: true })) // for parsing application/x-www
  */
 app.use((req, res, next) => {
     res.header('Access-Control-Allow-Origin', '*');
+    res.header('Access-Control-Allow-Credentials', true);
     res.header('Access-Control-Allow-Headers', 'Authorization, X-API-KEY, Origin, X-Requested-With, Content-Type, Accept, Access-Control-Allow-Request-Method');
     res.header('Access-Control-Allow-Methods', 'GET, POST, OPTIONS, PUT, DELETE');
     res.header('Allow', 'GET, POST, OPTIONS, PUT, DELETE');
@@ -40,7 +41,7 @@ app.delete('/tweet/:id', tweetController.deleteTweet);
 
 // User Controller Routing
 app.post('/user', userController.createUser);
-app.get('/user/:user', userController.getUserByUser);
+app.post('/user/login', userController.getUserByUser);
 app.get('/nickname/:nickname', userController.getUserByNickname);
 app.put('/user/:user', userController.modifyUser);
 app.delete('/user/:user', userController.deleteUser);
