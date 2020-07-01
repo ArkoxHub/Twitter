@@ -1,12 +1,17 @@
 window.onload = function () {
     console.log('Hello friend');
 
+    // Form Events
     var loginForm = document.getElementById('loginForm');
     loginForm.addEventListener('submit', getFormValues);
 
+    /**
+     * Recibe los parámetros escritos en el formulario para validarlos
+     * @param {*} event 
+     */
     function getFormValues(event) {
         event.preventDefault();
-        
+
         var divs = document.getElementsByClassName('alert');
         clearAlerts(divs);
 
@@ -34,6 +39,11 @@ window.onload = function () {
         }
     }
 
+    /**
+     * Crea un <div> con el mensaje pasádo por parámetro
+     * @param {String} error 
+     * @returns elemento <div> para ser insertado
+     */
     function createAlertError(error) {
         var div = document.createElement('div');
         var text = document.createElement('p');
@@ -48,10 +58,20 @@ window.onload = function () {
         return div;
     }
 
+    /**
+     * Inserta el un ElementNode pasado por parámetro después del referenciado.
+     * @param {Element} newNode nuevo que queremos inserir
+     * @param {Element} refNode referéncia del nodo al que le queremos inserir
+     * un nuevo elemento posterior
+     */
     function insertAfter(newNode, refNode) {
         refNode.parentNode.insertBefore(newNode, refNode.nextSibling);
     }
 
+    /**
+     * Elimina todos los div con classe 'alert' del DOM
+     * @param {Element} divs 
+     */
     function clearAlerts(divs) {
         if (divs.length > 0) {
             for (var i = 0; i <= divs.length; i++) {
@@ -75,14 +95,41 @@ window.onload = function () {
     }
 
     /**
-     * 
+     * Procesa la información de la petición AJAX al servidor que busca un usuario
+     * según el mensaje de status recibido
      * @param {*} data 
      */
-    function processResponse(data, status, xhr) {
+    function processResponse(data) {
+        var redirect = true;
         if (data.status === 'Success') {
-            console.log('Login correcto');
-            console.log(xhr.getResponseHeader('Set-Cookie'));
-            console.log(document.cookie)
+            if (!localStorage.getItem('username') || !localStorage.getItem('password')) {
+                localStorage.setItem('username', data.user[0].user);
+                localStorage.setItem('password', data.user[0].password1);
+
+                redirect = false;
+
+                // Redirect 
+                window.location.href = 'http://127.0.0.1:5500/index.html';
+            }
+
+            if (localStorage.getItem('username') !== data.user[0].user || localStorage.getItem('password') !== data.user[0].password1) {
+                var clientResponse = confirm('Quiere actualizar su Usuario y Contraseña en este navegador?');
+                if (clientResponse) {
+                    localStorage.setItem('username', data.user[0].user);
+                    localStorage.setItem('password', data.user[0].password1);
+
+                    redirect = false;
+
+                    // Redirect 
+                    window.location.href = 'http://127.0.0.1:5500/index.html';
+                }
+            }
+
+            if (redirect) {
+                window.location.href = 'http://127.0.0.1:5500/index.html';
+            }
+            // document.cookie = 'user=' + data.user[0].user + '; max-age=31536000‬; path=/'; // 1 year duration = 60 * 60 * 24 * 365
+            // document.cookie = 'password=' + data.user[0].password1 + '; max-age=31536000‬; path=/'; // 1 year duration = 60 * 60 * 24 * 365
         }
 
         if (data.status === 'User') {

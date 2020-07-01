@@ -1,2 +1,2 @@
 # Twitter
-Twitter homemade using Angular
+Twitter homemade

@@ -9,10 +9,10 @@ var trendingSchema = new Schema({
     tweet_ID: [String]
 });
 
-/** Hace que el campo hashtag sea unique */
 
 var TrendingModel = mongoose.model('TrendingTopic', trendingSchema);
 
+/** Hace que el campo hashtag sea unique */
 TrendingModel.collection.createIndex({ hashtag: 1 }, { unique: true });
 
 module.exports = TrendingModel;

@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Crea tú cuenta Twitter</title>
+    <!-- FAVICON -->
+    <link rel="icon" href="../assets/img/newfavicon.png">
+    <!-- Font Awesome -->
+    <link type="text/css" href="../assets/fonts/fontawesome-free-5.13.0-web/css/all.css" rel="stylesheet">
+    <!-- My CSS -->
+    <link type="text/css" rel="stylesheet" href="../css/signin.css">
+    <!-- jQuery -->
+    <script src="../scripts/jQuery/jquery-3.4.1.js"></script>
+    <!-- My Script -->
+    <script src="../scripts/signin.js"></script>
+</head>
+
+<body>
+    <div id="container">
+        <header id="header">
+            <h1>Crea tu nueva cuenta de Twitter</h1>
+            <h3>Descubre qué está pasando ahora</h3>
+            <i class="fab fa-twitter logo"></i>
+        </header>
+
+        <section id="section">
+            <form id="signForm" method="POST" action="#">
+                <div class="data-form1">
+                    <h5>Perfil de Twitter</h5>
+                    <label for="user"><i class="fas fa-user"></i> Nombre de tú cuenta *</i></label>
+                    <input type="text" name="user" id="user" placeholder="Nombre de tu cuenta de Twitter para buscarte">
+
+                    <label for="nickname"><i class="far fa-comment-dots"></i> Nickname *</i></label>
+                    <input type="text" name="nickname" id="nickname"
+                        placeholder="Nombre con el que se publicarán tus Tweets">
+
+                    <label for="password1"><i class="fas fa-key"></i> Contrasenya *</label>
+                    <input type="password" name="password1" id="password1"
+                        placeholder="Mínimo 6 carácteres y debe contener letras con números">
+
+                    <label for="password2"><i class="fas fa-key"></i> Repite la contrasenya *</label>
+                    <input type="password" name="password2" id="password2" class="input-disabled" disabled>
+
+                    <label for="email"><i class="fas fa-envelope"></i> Correo electrónico *</label>
+                    <input type="email" name="email" id="email">
+                </div>
+
+                <div class="data-form2">
+                    <h5>Sobre mí</h5>
+                    <label for="name"><i class="fas fa-portrait"></i> Nombre</label>
+                    <input type="text" name="name" id="name">
+
+                    <label for="surname"><i class="fas fa-portrait"></i> Apellidos</label>
+                    <input type="text" name="surname" id="surname">
+
+                    <label for="birthday"><i class="fas fa-birthday-cake"></i> Tú cumpleaños</label>
+                    <input type="date" name="birhtday" id="birthday">
+
+                    <label for="bio"><i class="fas fa-book-open"></i> Biografía *</label>
+                    <textarea name="bio" id="bio" cols="30" rows="8" maxlength="250"
+                        placeholder="Esta información será la que aparecerá de cabecera en tu perfil para que tus seguidores sepan más sobre tí."></textarea>
+                </div>
+
+                <input id="signinSubmit" type="submit" value="Registrarse">
+            </form>
+        </section>
+    </div>
+</body>
+
+</html>

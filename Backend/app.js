@@ -42,6 +42,8 @@ app.delete('/tweet/:id', tweetController.deleteTweet);
 // User Controller Routing
 app.post('/user', userController.createUser);
 app.post('/user/login', userController.getUserByUser);
+app.post('/user/exists/user', userController.checkUserExists);
+app.post('/user/exists/email', userController.checkMailExists);
 app.get('/nickname/:nickname', userController.getUserByNickname);
 app.put('/user/:user', userController.modifyUser);
 app.delete('/user/:user', userController.deleteUser);

@@ -1,5 +1,6 @@
 'use strict'
 
+// Global variables
 const tweet_MaxLength = 240;
 
 // Load Moment JS
@@ -9,6 +10,44 @@ moment.locale('es')
 window.onload = function () {
     console.log("Hi friend");
 
+    checkUser();
+    function checkUser() {
+        var username = localStorage.getItem('username');
+        var pwd = localStorage.getItem('password');
+
+        if (username && pwd) {
+            $.ajax({
+                method: 'post',
+                url: 'http://localhost:3000/user/login',
+                data: {
+                    user: username,
+                    password: pwd
+                },
+                datatype: 'json',
+                success: userResponse,
+                error: function () {
+                    alert('Servidor caído. Inténtelo de nuevo más tarde.')
+                }
+            });
+        } else {
+            window.location = 'http://127.0.0.1:5500/Components/login.html';
+        }
+
+    }
+}
+
+function userResponse(data) {
+    console.log(data)
+    if (data.status === 'Success') {
+        start();
+    } else {
+        console.log('Rabos')
+        window.location = 'http://127.0.0.1:5500/Components/login.html';
+    }
+}
+
+function start() {
+    // Si tiene datos de login, cargaremos la web
     loadTweets();
 
     /**
@@ -265,5 +304,4 @@ window.onload = function () {
         var article = document.getElementsByClassName(data.tweet._id);
         article[0].parentNode.removeChild(article[0]);
     }
-
 }

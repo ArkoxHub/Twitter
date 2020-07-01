@@ -16,69 +16,95 @@ var userController = {
         var user_Params = req.body;
 
         try {
-            if (validator.isEmpty(user_Params.user)) {
-                return res.status(400).send({
-                    status: 'Failed',
-                    message: 'El campo user es obligatorio'
-                });
-            } else if (!validator.isEmail(user_Params.email)) {
-                return res.status(400).send({
-                    status: 'Failed',
-                    message: 'El campo email no es correcto'
-                });
-            } else if (validator.isEmpty(user_Params.password1)) {
-                return res.status(400).send({
-                    status: 'Failed',
-                    message: 'El campo contraseña 1 es obligatorio'
-                });
-            } else if (validator.isEmpty(user_Params.password2)) {
-                return res.status(400).send({
-                    status: 'Failed',
-                    message: 'El campo contraseña 2 es obligatorio'
-                });
-            } else if (user_Params.password1 !== user_Params.password2) {
-                return res.status(400).send({
-                    status: 'Failed',
-                    message: 'Las contraseñas no coinciden'
-                });
-            } else {
-                // All ok, asignamos valores y guardamos en la base de datos
-                var user = new user_Model();
-                user.user = user_Params.user;
-                user.email = user_Params.email;
-                user.password1 = user_Params.password1;
-                if (user_Params.nickname) {
-                    user.nickname = user_Params.nickname;
-                }
-                user.save(function (err, user_Saved) {
-                    if (!user_Saved || err) {
-                        return res.status(500).send({
-                            status: 'Failed',
-                            message: 'El nombre de usuario ya está ocupado'
-                        });
-                    }
-
-                    /**
-                     * Save Cookies to client
-                     * user: Saves the user name
-                     * password: Saves de password * ¡¡¡¡HACE FALTA ENCRIPTARLA!!!! *
-                     */
-                    res.cookie('user', user.user, { maxAge: 8760 * 60 * 60 * 1000 }); // 1 year
-                    res.cookie('password', user.password1, { maxAge: 8760 * 60 * 60 * 1000 }); // 1 year
-
-                    return res.status(200).send({
-                        status: 'Success',
-                        message: 'Usuario creado correctamente',
-                        user: user_Saved
-                    })
-                });
+            console.log(user_Params)
+            // All ok, asignamos valores y guardamos en la base de datos
+            var user = new user_Model();
+            user.user = user_Params.user;
+            user.email = user_Params.email;
+            user.password1 = user_Params.password1;
+            user.nickname = user_Params.nickname;
+            user.bio = user_Params.bio;
+            if (user_Params.name) {
+                user.name = user_Params.name;
             }
+            if (user_Params.surname) {
+                user.surname = user_Params.surname;
+            }
+            if (user_Params.birthday) {
+                user.birthday = user_Params.birthday;
+            }
+
+            user.save(function (err, user_Saved) {
+                // Si da error
+                if (!user_Saved || err) {
+                    return res.status(500).send({
+                        status: 'Failed',
+                        message: 'Error al intentar crear el usuario. Inténtelo de nuevo más tarde.'
+                    });
+                }
+
+                /**
+                 * Save Cookies to client
+                 * user: Saves the user name
+                 * password: Saves de password * ¡¡¡¡HACE FALTA ENCRIPTARLA!!!! *
+                 */
+                res.cookie('user', user.user, { maxAge: 8760 * 60 * 60 * 1000 }); // 1 year
+                res.cookie('password', user.password1, { maxAge: 8760 * 60 * 60 * 1000 }); // 1 year
+
+                return res.status(200).send({
+                    status: 'Success',
+                    message: 'Usuario creado correctamente',
+                    user: user_Saved
+                });
+
+            });
+
         } catch (err) {
             return res.status(500).send({
                 status: 'Failed',
-                message: 'Error with the server, please try later'
+                message: 'Error with the server, please try later',
+                error: err
             });
         }
+    },
+
+    checkUserExists: function (req, res) {
+        var user = req.body.user;
+
+        user_Model.exists({ user: user }, function (err, result) {
+            if (err) {
+                return res.status(500).send({
+                    status: 'Failed',
+                    message: 'Ha habido un error al intentar conectar con el servidor'
+                })
+            } else {
+                return res.status(200).send({
+                    status: 'Success',
+                    result: result,
+                    type: 'user'
+                })
+            }
+        });
+    },
+
+
+    checkMailExists: function (req, res) {
+        var email = req.body.email;
+
+        user_Model.exists({ email: email }, function (err, result) {
+            if (err) {
+                return res.status(500).send({
+                    status: 'Failed',
+                    message: 'Ha habido un error al intentar conectar con el servidor'
+                })
+            } else {
+                return res.status(200).send({
+                    status: 'Success',
+                    result: result,
+                    type: 'email'
+                })
+            }
+        });
     },
 
     /**

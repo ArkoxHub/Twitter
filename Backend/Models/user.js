@@ -8,7 +8,6 @@ var userSchema = new Schema({
     user: String,
     email: String,
     password1: String,
-    password2: String,
     nickname: String,
     name: String,
     surname: String,
@@ -27,8 +26,9 @@ var userSchema = new Schema({
 // Crea un Modelo a la Data Base que lo llamará 'users'
 var UserModel = mongoose.model('User', userSchema);
 
-/** Hace que el campo user sea unique */
+/** Hace que los campos user y email sean unique */
 UserModel.collection.createIndex({ user: 1 }, { unique: true });
+UserModel.collection.createIndex({ email: 1 }, { unique: true });
 
 /** Exportamos el modelo para hacerlo modular */
 module.exports = UserModel;
