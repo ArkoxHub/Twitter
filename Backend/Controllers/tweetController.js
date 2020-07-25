@@ -17,7 +17,7 @@ var tweetController = {
 
         if (!id) {
             res.status(400).send({
-                status: 'Error',
+                status: 'Failed',
                 message: 'No se ha pasado ningun parámetro'
             });
         }
@@ -25,14 +25,14 @@ var tweetController = {
         tweetModel.findById(id, function (err, tweetModel) {
             if (err || !tweetModel) {
                 res.status(500).send({
-                    status: 'Error',
+                    status: 'Failed',
                     message: 'No se ha encontrado ningún Tweet con este ID'
                 });
             }
 
             if (tweetModel) {
                 res.status(200).send({
-                    status: 'Correct',
+                    status: 'Success',
                     message: 'Tweet encontrado',
                     tweet: tweetModel
                 })
@@ -60,13 +60,13 @@ var tweetController = {
                             message: 'Error al consultar en la base de datos'
                         });
                     }
-                    if (Object.keys(tweets).length === 0) {
-                        return res.status(500).send({
-                            status: 'Failed',
-                            message: 'No hay Tweets a mostrar para este usuario',
-                            t: tweets
-                        });
-                    }
+                    // if (Object.keys(tweets).length === 0) {
+                    //     return res.status(500).send({
+                    //         status: 'Failed',
+                    //         message: 'No hay Tweets a mostrar para este usuario',
+                    //         t: tweets
+                    //     });
+                    // }
                     return res.status(200).send({
                         status: 'Success',
                         message: 'See the tweets of ' + userName + ' below',
@@ -142,35 +142,23 @@ var tweetController = {
      * @param {*} res 
      */
     updateTweet: function (req, res) {
-        var id = req.params.id;
-        var toUpdate = req.body;
-
-        try {
-            if (id) {
-                // Update
-                tweetModel.findByIdAndUpdate(id, toUpdate, { new: true }, function (err, tweetUpdated) {
-                    if (err) {
-                        console.log('Eres tonto')
-                    }
-
-                    return res.status(200).send({
-                        status: 'Success',
-                        message: 'Se ha actualizado el Tweet', id,
-                        tweet: tweetUpdated
+        var tweetToUpdate = req.body.tweet
+        
+        tweetModel.findOneAndUpdate({ _id: tweetToUpdate._id }, tweetToUpdate, { new: true },
+            (err, tweetUpdated) => {
+                if (err, !tweetUpdated) {
+                    return res.status(500).send({
+                        status: 'Failed',
+                        message: 'Error trying to update the Tweet'
                     });
+                }
+
+                return res.status(200).send({
+                    status: 'Success',
+                    message: 'Tweet updated',
+                    tweet: tweetUpdated
                 });
-            } else {
-                return res.status(400).send({
-                    status: 'Failed',
-                    message: 'No se ha pasado un ID en el parámetro'
-                });
-            }
-        } catch (err) {
-            return res.status(500).send({
-                status: 'Failed',
-                message: 'Error al conectar con la base de datos'
             });
-        }
     },
 
     /**

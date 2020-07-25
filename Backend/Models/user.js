@@ -14,16 +14,14 @@ var userSchema = new Schema({
     bio: String,
     birthday: Date,
     creation_date: { type: Date, default: Date.now },
-    followers: [
-        { user: String }
-    ],
-    following: [
-        { user: String }
-    ]
+    followers: [],
+    following: [],
+    tweets_Likes: [],
+    tweets_Retweet: []
 });
 
 
-// Crea un Modelo a la Data Base que lo llamará 'users'
+// Crea un Modelo a la DataBase que lo llamará 'users'
 var UserModel = mongoose.model('User', userSchema);
 
 /** Hace que los campos user y email sean unique */

@@ -16,7 +16,6 @@ var userController = {
         var user_Params = req.body;
 
         try {
-            console.log(user_Params)
             // All ok, asignamos valores y guardamos en la base de datos
             var user = new user_Model();
             user.user = user_Params.user;
@@ -165,7 +164,7 @@ var userController = {
     /**
      * METHOD: GET
      * READ USER
-     * Se obtiene el valor del nickname por la URL.
+     * Se obtiene el valor del user por la URL.
      * Buscamos todas las coincidencias en la colección "users" y devolvemos la respuesta en formato json
      * Devuelve máximo 5 objetos
      * 
@@ -183,7 +182,7 @@ var userController = {
                 message: 'No se ha pasado correctamente el usuario por parámetro'
             });
         } else {
-            user_Model.find({ nickname: user_Nickname }, null, { limit: 5 }, function (err, users_Response) {
+            user_Model.find({ user: user_Nickname }, null, { limit: 5 }, function (err, users_Response) {
                 if (!users_Response[0] || err) {
                     return res.status(500).send({
                         status: 'Failed',
@@ -200,6 +199,25 @@ var userController = {
         }
     },
 
+    getUserByUserName: function (req, res) {
+        console.log(req.params.user)
+        var userName = req.params.user;
+
+        user_Model.findOne({ user: userName}, function (err, usuario) {
+            if (err) {
+                return res.status(500).send({
+                    status: 'Failed',
+                    message: 'Usuario no encontrado',
+                })
+            }
+            return res.status(200).send({
+                status: 'Success',
+                message: 'Usuario encontrado',
+                user: usuario
+            });
+        });
+    },
+
     /**
      * Method: PUT
      * UPDATE USER
@@ -210,14 +228,14 @@ var userController = {
      * @returns El documento user actualizado
      */
     modifyUser: function (req, res) {
-        var user_Name = req.params.user;
-        var user_Body = req.body;
+        var userID = req.params.user;
+        var user = req.body.user;
 
-        console.log('user_Name', user_Name)
-        console.log('user_Body', user_Body)
+        console.log('userID', userID)
+        console.log('Usuario a actualizar', user)
 
         // Validamos usuario pasado por parámetro URL
-        if (validator.isEmpty(user_Name)) {
+        if (validator.isEmpty(userID)) {
             return res.status(500).send({
                 status: 'Failed',
                 message: 'No se ha pasado ningún usuario a buscar'
@@ -225,22 +243,21 @@ var userController = {
         }
 
         // Validamos que tengamos datos que modificar
-        if ((Object.keys(user_Body).length) === 0) {
+        if ((Object.keys(user).length) === 0) {
             return res.status(500).send({
                 status: 'Failed',
                 message: 'No se ha pasado ningún usuario para modificar'
             });
         }
-
-        // Buscamos que exista el usuario en nuestra colección de datos y lo modificamos
-        user_Model.findOneAndUpdate({ user: user_Name }, user_Body, { new: true }, function (err, userModified) {
-            if (err || !userModified) {
+        
+        user_Model.findByIdAndUpdate(userID, user, { new: true }, function (err, userModified) {
+            if (err) {
                 return res.status(500).send({
                     status: 'Failed',
-                    message: 'No se ha encontrado a ningun usuario con este nombre en la base de datos'
+                    message: 'Error al actualizar el usuario', user,
                 });
             }
-            return res.status(500).send({
+            return res.status(200).send({
                 status: 'Success',
                 message: 'Usuario modificado!',
                 user: userModified
@@ -287,9 +304,29 @@ var userController = {
                 }
             });
         }
+    },
+
+    updateUser: function(req, res) {
+        var user = req.body.user;
+        if (!user.tweets_Likes) { user.tweets_Likes = new Array() };
+        if (!user.tweets_Retweet) { user.tweets_Retweet = new Array() };
+        
+        user_Model.findOneAndUpdate({_id : user._id}, user, {new: true}, (err, userUpdated) => {
+            if (err || !userUpdated) {
+                return res.status(500).send({
+                    status: 'Failed',
+                    message: 'No se ha encontrado ningún usuario'
+                });
+            }
+
+            return res.status(200).send( {
+                status: 'Success',
+                message: 'Se ha actualizado el usuario',
+                user: userUpdated
+            });
+        });
+
     }
-
-
 }
 
 module.exports = userController;

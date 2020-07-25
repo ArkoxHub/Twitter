@@ -36,7 +36,7 @@ app.use((req, res, next) => {
 app.get('/tweet/:id', tweetController.getTweet);
 app.get('/tweets/:user', tweetController.getAllTweets);
 app.post('/tweet', tweetController.saveTweet);
-app.put('/tweet/:id', tweetController.updateTweet);
+app.put('/tweet/update', tweetController.updateTweet);
 app.delete('/tweet/:id', tweetController.deleteTweet);
 
 // User Controller Routing
@@ -45,6 +45,8 @@ app.post('/user/login', userController.getUserByUser);
 app.post('/user/exists/user', userController.checkUserExists);
 app.post('/user/exists/email', userController.checkMailExists);
 app.get('/nickname/:nickname', userController.getUserByNickname);
+app.get('/user/:user', userController.getUserByUserName);
+app.put('/user/update', userController.updateUser);
 app.put('/user/:user', userController.modifyUser);
 app.delete('/user/:user', userController.deleteUser);
 
