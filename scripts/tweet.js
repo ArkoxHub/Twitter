@@ -40,6 +40,16 @@ $(document).ready(function () {
         console.log(error, statusText);
     }
 
+    function getTweetByID(id_Tweet) {
+        $.ajax({
+            method: 'get',
+            url: 'http://localhost:3000/tweet/' + id_Tweet,
+            datatype: 'json',
+            success: receiveTweet,
+            error: showError
+        });
+    }
+
     function appendTweet(dades) {
         // Contenedor ref para append
         var articles = document.getElementById('articles');
@@ -81,22 +91,30 @@ $(document).ready(function () {
 
         // Segundo bloque
         var ul = document.createElement('ul');
+
         var li1 = document.createElement('li');
         var li2 = document.createElement('li');
         var li3 = document.createElement('li');
         var li4 = document.createElement('li');
+
         var i1 = document.createElement('i');
         i1.classList.add('far');
         i1.classList.add('fa-comment');
+        
         var i2 = document.createElement('i');
         i2.classList.add('fas');
         i2.classList.add('fa-retweet');
+
         var i3 = document.createElement('i');
         i3.classList.add('fas');
         i3.classList.add('fa-heart');
+        i3.classList.add('tweet-like');
+        i3.addEventListener('click', likeComment);
+
         var i4 = document.createElement('i');
         i4.classList.add('fas');
         i4.classList.add('fa-upload');
+
         // Append
         li1.appendChild(i1);
         li2.appendChild(i2);
@@ -123,6 +141,16 @@ $(document).ready(function () {
 
         // Final append
         articles.prepend(article);
+    }
+
+    function likeComment(event) {
+        event.preventDefault();
+        event.stopPropagation();
+        var tweet_ID = this.parentNode.parentNode.parentNode.classList[1];
+    }
+
+    function receiveTweet(data) {
+        
     }
 
 });

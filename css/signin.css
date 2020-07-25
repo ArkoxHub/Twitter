@@ -209,7 +209,9 @@ input[type="submit"]:hover {
     border: 1px solid red !important;
 }
 
-.warning-message {
+.warning-message, 
+.warning-message-user,
+.warning-message-email {
     color: red;
     font-size: 20px;
 }

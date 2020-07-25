@@ -28,22 +28,24 @@
                 <ul>
                     <li><a href="./index.html"><i class="fab fa-twitter menu-icon"></i></a></li>
                     <li><a href="#" class="menu-link"><i class="fas fa-home menu-icon"></i><span>Inicio</span></a></li>
-                    <li><a href="#" class="menu-link"><i class="fas fa-hashtag menu-icon"></i><span>Explorar</span></a>
-                    </li>
-                    <li><a href="#" class="menu-link"><i
-                                class="far fa-bell menu-icon"></i><span>Notificaciones</span></a></li>
-                    <li><a href="#" class="menu-link"><i class="far fa-envelope menu-icon"></i><span>Mensajes</span></a>
-                    </li>
-                    <li><a href="#" class="menu-link"><i
-                                class="far fa-bookmark menu-icon"></i><span>Guardados</span></a></li>
-                    <li><a href="#" class="menu-link"><i class="far fa-list-alt menu-icon"></i><span>Listas</span></a>
-                    </li>
+                    <li><a href="#" class="menu-link"><i class="fas fa-hashtag menu-icon"></i><span>Explorar</span></a></li>
+                    <li><a href="#" class="menu-link"><i class="far fa-bell menu-icon"></i><span>Notificaciones</span></a></li>
+                    <li><a href="#" class="menu-link"><i class="far fa-envelope menu-icon"></i><span>Mensajes</span></a></li>
+                    <li><a href="#" class="menu-link"><i class="far fa-bookmark menu-icon"></i><span>Guardados</span></a></li>
+                    <li><a href="#" class="menu-link"><i class="far fa-list-alt menu-icon"></i><span>Listas</span></a></li>
                     <li><a href="#" class="menu-link"><i class="fas fa-user menu-icon"></i><span>Perfil</span></a></li>
-                    <li><a href="#" class="menu-link"><i class="fas fa-ellipsis-h menu-icon"></i><span>Más
-                                opciones</span></a></li>
+                    <li>
+                        <a href="#" class="menu-link"><i class="fas fa-ellipsis-h menu-icon"></i><span>Más opciones</span></a>
+                    </li>
                     <button id="twittear" class="btn-tweet">Twittear</button>
                     <button id="twittear" class="btn-tweet hidden"><i class="fas fa-feather"></i></button>
                 </ul>
+                <!-- This section works as extension of nav when user clicks on "More Options" nav menu -->
+                <div id="subnav">
+                    <div><a href="#"><i class="fas fa-cog"></i>Configuración</a></div>
+                    <div><a href="#"><i class="fas fa-desktop"></i>Pantalla</a></div>
+                    <div><a href="./Components/login.html"><i class="fas fa-user-times"></i>Cerrar sesión</a></div>
+                </div>
             </nav>
         </header>
         <!-- Fin barra lateral navegación -->
@@ -64,8 +66,6 @@
                         <img class="self-img" src="./assets/img/72efegBj_400x400.jpg" alt="foto-perfil">
                         <form id="form-tweet" method="POST">
                             <textarea id="write-tweet" placeholder="¿Qué está pasando?" maxlength="240"></textarea>
-                            <input type="text" name="nickname" id="nickname" value="Arkox" hidden>
-
                     </div>
                     <div id="tweet-options">
                         <ul>
@@ -88,7 +88,7 @@
             <!-- ARTICLE TWEET -->
             <div id="articles">
                 <!-- Tweets -->
-                <!-- Example -->
+                <!-- EXAMPLE OF TWEET BODY -->
                 <!-- <article class="tweet">
                     <div class="profile">
                         <img class="self-img" src="./assets/img/61ri1JvQEJL.png" alt="perfil">
@@ -104,7 +104,7 @@
                         <li><i class="fas fa-upload"></i></li>
                     </ul>
                 </article> -->
-                <!-- End Example -->
+                <!-- END EXAMPLE OF TWEET BODY -->
                 <!-- Fin Tweets -->
             </div>
         </section>
@@ -129,24 +129,24 @@
                         <p class="total-tweets">44,9 mil Tweets</p>
                     </div>
                     <div class="card-tt">
-                        <p class="category-tt">1 · Tendencias</p>
-                        <p class="hastag">#Coronavirus</p>
-                        <p class="total-tweets">44,9 mil Tweets</p>
+                        <p class="category-tt">2 · Tendencias</p>
+                        <p class="hastag">#Avatar 2</p>
+                        <p class="total-tweets">39,5 mil Tweets</p>
                     </div>
                     <div class="card-tt">
-                        <p class="category-tt">1 · Tendencias</p>
-                        <p class="hastag">#Coronavirus</p>
-                        <p class="total-tweets">44,9 mil Tweets</p>
+                        <p class="category-tt">3 · Tendencias</p>
+                        <p class="hastag">#Xbox</p>
+                        <p class="total-tweets">25,2 mil Tweets</p>
                     </div>
                     <div class="card-tt">
-                        <p class="category-tt">1 · Tendencias</p>
-                        <p class="hastag">#Coronavirus</p>
-                        <p class="total-tweets">44,9 mil Tweets</p>
+                        <p class="category-tt">4 · Tendencias</p>
+                        <p class="hastag">#Esperanza Aguirre</p>
+                        <p class="total-tweets">20,8 mil Tweets</p>
                     </div>
                     <div class="card-tt">
-                        <p class="category-tt">1 · Tendencias</p>
-                        <p class="hastag">#Coronavirus</p>
-                        <p class="total-tweets">44,9 mil Tweets</p>
+                        <p class="category-tt">5 · Tendencias</p>
+                        <p class="hastag">#Prudencio</p>
+                        <p class="total-tweets">10,4 mil Tweets</p>
                     </div>
                 </div>
             </div>

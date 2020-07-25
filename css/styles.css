@@ -1,3 +1,4 @@
+/* General */
 :root {
     --main-color: #15202b;
     --main-hover-color: #16242f;
@@ -17,7 +18,7 @@ body {
     background-color: var(--main-color);
 }
 
-/* GLOBAL CONTENT */
+
 #content {
     display: flex;
     flex-flow: row wrap;
@@ -27,7 +28,9 @@ body {
     color: rgb(146, 145, 145)
 }
 
-/* HEADER */
+/* End General */
+
+/* HEADER NAV */
 #header {
     display: flex;
     flex-flow: column wrap;
@@ -71,6 +74,48 @@ body {
     transition: all 300ms;
 }
 
+/* SUBNAV */
+#menu #subnav {
+    display: none;
+    z-index: 1;
+    background-color: var(--main-color);
+    border: 1px solid rgba(182, 181, 181, 0.342);
+    box-shadow: 0px 0px 10px var(--gray-main-color);
+    border-radius: 0.3em;
+    height: 180px;
+}
+
+#menu #subnav.active {
+    display: flex;
+    flex-flow: column nowrap;
+    position: absolute;
+    top: 320px;
+    width: 220px;
+}
+
+#menu #subnav div {
+    padding: 20px;
+}
+
+#menu #subnav div:hover {
+    cursor: pointer;
+    background-color: var(--main-li-hover-color);
+}
+
+#menu #subnav div a {
+    text-decoration: none;
+    color: white;
+}
+
+#menu #subnav div a i {
+    margin-right: 10px;
+}
+
+#menu #subnav div:hover a i {
+    color: dodgerblue;
+}
+/* END SUBNAV */
+
 .btn-tweet {
     height: 50px;
     width: 218px;
@@ -100,6 +145,8 @@ body {
     background-color: rgb(18, 87, 214);
     box-shadow: 1px 1px 3px rgb(11, 34, 78);
 }
+/* END HEADER NAV */
+
 
 /* CENTRAL */
 #container {
@@ -316,6 +363,16 @@ body {
 
 .tweet .fa-times:hover {
     color: red;
+    opacity: 1;
+}
+
+.tweet .user-like {
+    color: red;
+    opacity: 1;
+}
+
+.tweet .user-retweet {
+    color: rgb(79, 221, 79);
     opacity: 1;
 }
 
@@ -566,6 +623,10 @@ body {
 }
 
 @media only screen and (max-width: 640px) {
+
+    #menu #subnav.active {
+        display: none;
+    }
     
     #tweet-client {
         display: none;

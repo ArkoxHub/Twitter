@@ -102,9 +102,9 @@ window.onload = function () {
     function processResponse(data) {
         var redirect = true;
         if (data.status === 'Success') {
-            if (!localStorage.getItem('username') || !localStorage.getItem('password')) {
-                localStorage.setItem('username', data.user[0].user);
-                localStorage.setItem('password', data.user[0].password1);
+            if (!localStorage.getItem('twitter-username') || !localStorage.getItem('twitter-password')) {
+                localStorage.setItem('twitter-username', data.user[0].user);
+                localStorage.setItem('twitter-password', data.user[0].password1);
 
                 redirect = false;
 
@@ -112,11 +112,11 @@ window.onload = function () {
                 window.location.href = 'http://127.0.0.1:5500/index.html';
             }
 
-            if (localStorage.getItem('username') !== data.user[0].user || localStorage.getItem('password') !== data.user[0].password1) {
+            if (localStorage.getItem('twitter-username') !== data.user[0].user || localStorage.getItem('twitter-password') !== data.user[0].password1) {
                 var clientResponse = confirm('Quiere actualizar su Usuario y Contraseña en este navegador?');
                 if (clientResponse) {
-                    localStorage.setItem('username', data.user[0].user);
-                    localStorage.setItem('password', data.user[0].password1);
+                    localStorage.setItem('twitter-username', data.user[0].user);
+                    localStorage.setItem('twitter-password', data.user[0].password1);
 
                     redirect = false;
 
