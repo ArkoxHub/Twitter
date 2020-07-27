@@ -1,0 +1,268 @@
+/* General */
+:root {
+    --main-color: #15202b;
+    --main-hover-color: #16242f;
+    --main-li-hover-color: rgba(29, 161, 242, 0.1);
+    --button-color: rgb(29, 161, 242);
+    --button-color-opacity: rgb(29, 161, 242, 0.050);
+    --border-color: rgb(56, 68, 77);
+    --gray-main-color: rgb(138, 125, 125);
+}
+
+/* CONTAINER */
+#container .inicio {
+    height: 70px;
+    justify-content: flex-start;
+}
+
+#container .inicio i {
+    line-height: 70px;
+}
+
+#container #userName {
+    font-weight: bold;
+    font-size: 20px;
+}
+
+#star-image {
+    height: 45px;
+    margin-top: 10px;
+    margin-left: auto;
+}
+
+#user-info {
+    display: flex;
+    flex-flow: column nowrap;
+}
+
+#user-info #total-tweets {
+    line-height: 5px;
+    font-weight: 70;
+    font-size: 14px;
+    color: var(--gray-main-color);
+}
+
+/* PROFILE SECTION */
+#profile-section {
+    width: 100%;
+    height: 511px;
+    border-bottom: 1px solid var(--border-color);
+}
+
+#profile-images {
+    width: 100%;
+    height: 287px;
+}
+
+#profile-section #header-photo{
+    width: 100%;
+}
+
+#profile-section #profile-photo {
+    width: 170px;
+    border-radius: 100%;
+    position: relative;
+    bottom: 100px;
+    left: 3%;
+    border: 5px solid rgb(42, 42, 42)
+}
+
+#profile-content {
+    color: white
+}
+
+#profile-content #editButton {
+    width: 150px;
+    height: 45px;
+    border: 1px solid var(--button-color);
+    color: var(--button-color);
+    border-radius: 2em;
+    font-size: 18px;
+    font-weight: 700;
+    background-color: var(--main-color);
+    position: relative;
+    bottom: 30px;
+    left: 72%;
+}
+
+#profile-content #editButton:hover {
+    cursor: pointer;
+    background-color: var(--button-color-opacity);
+}
+
+#profile-content #editButton:focus {
+    outline: none;
+}
+
+#profile-content p {
+    margin-left: 20px;
+}
+
+#profile-content #content-nickname {
+    font-size: 20px;
+    font-weight: bold;
+}
+
+#profile-content #content-user {
+    font-size: 15px;
+    font-weight: 100;
+    color:var(--gray-main-color);
+}
+
+#profile-content #content-bio {
+    margin-top: 10px;
+    margin-bottom: 10px;
+    font-size: 15px;
+}
+
+#content-birthday, #content-join {
+    font-size: 15px;
+    font-weight: 100;
+    color:var(--gray-main-color);
+}
+
+#profile-followers p {
+    display: inline-block;
+    margin-right: 20px;
+    margin-top: 5px;
+}
+
+#menu-content {
+    display: flex;
+    flex-flow: row nowrap;
+    color: white;
+    margin-top: 11px;
+    justify-content: space-around;
+    height: 60px;
+}
+
+#menu-content .menu-options {
+    width: 100%;
+    height: 100%;
+    text-align: center;
+    line-height: 60px;
+}
+
+#menu-content .menu-options:nth-child(1) {
+    width: 400px;
+}
+
+#menu-content div:hover {
+    cursor: pointer;
+    background-color: var(--main-hover-color);
+    color: var(--button-color);
+    border-bottom: 1px solid var(--button-color);
+}
+/* END PROFILE SECTION */
+/* END CONTAINER */
+
+/* MEDIA QUERIES */
+@media screen and (max-width: 2560px) {
+    #profile-section {
+        height: 556px;;
+    }
+}
+@media screen and (max-width: 1900px) {
+    #profile-section {
+        height: 511px;;
+    }
+
+    #profile-images {
+        height: 242px;;
+    }
+}
+
+@media screen and (max-width: 1900px) {
+    #profile-images {
+        height: 242px;;
+    }
+}
+
+@media screen and (max-width: 1380px) {
+    #editButton {
+        top: 130px;
+    }
+}
+
+@media screen and (max-width: 1377px) {
+    #profile-section {
+        height: 690px;
+    }
+
+    #profile-content {
+        margin-top: 160px;
+    }
+
+    #menu-content {
+        margin-top: 30px;
+    }
+
+    #editButton {
+        top: -20px;
+    }
+}
+
+@media screen and (max-width: 882px) {
+    #profile-section {
+        height: 580px;
+    }
+
+    #profile-content {
+        margin-top: 50px;
+    }
+}
+
+@media screen and (max-width: 510px) {
+    #profile-section {
+        height: 562px;
+    }
+
+    #editButton {
+        left: 350px !important;
+        top: -20px !important;
+        width: 120px !important;
+        font-size: 16px !important;
+    }
+
+    #profile-content {
+        margin-top: 32px;
+    }
+
+    #profile-images {
+        height: 180px;
+    }
+
+    #menu-content {
+        flex-flow: row wrap;
+    }
+
+    #menu-content .menu-options {
+        flex: 0 50%;
+    }
+
+    .menu-options {
+        border-top: 1px solid var(--border-color);
+    }
+}
+
+@media screen and (max-width: 475px) {
+    #editButton {
+        left: 220px !important;
+        top: -30px !important;
+        width: 120px !important;
+        font-size: 16px !important;
+    }
+
+    #profile-section {
+        height: 550px;
+    }
+
+    #profile-content {
+        margin-top: 0px;
+    }
+
+    #profile-images {
+        height: 180px;
+    }
+}
+/* END MEDIA QUERIES */

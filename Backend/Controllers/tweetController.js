@@ -60,13 +60,7 @@ var tweetController = {
                             message: 'Error al consultar en la base de datos'
                         });
                     }
-                    // if (Object.keys(tweets).length === 0) {
-                    //     return res.status(500).send({
-                    //         status: 'Failed',
-                    //         message: 'No hay Tweets a mostrar para este usuario',
-                    //         t: tweets
-                    //     });
-                    // }
+                    
                     return res.status(200).send({
                         status: 'Success',
                         message: 'See the tweets of ' + userName + ' below',

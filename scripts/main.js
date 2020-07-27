@@ -84,9 +84,26 @@ function start() {
 
     // Listener Scroll Button
     var button_top = document.getElementById("scroll-button");
-    button_top.addEventListener('click', scrollToTop);
+    button_top.addEventListener('click', scrollTo(document.documentElement, 0, 1250));
+
+    var toTop = document.getElementById("scroll-button");
+    toTop.addEventListener("click", () => { scrollToTop(100) });
 
     /**
+     * 
+     * @param {Number} scrollDuration ms to scroll to top
+     */
+    function scrollToTop(scrollDuration) {
+        var scrollStep = -window.scrollY / (scrollDuration / 15),
+            scrollInterval = setInterval(function () {
+                if (window.scrollY != 0) {
+                    window.scrollBy(0, scrollStep);
+                }
+                else clearInterval(scrollInterval);
+            }, 15);
+    }
+
+        /**
      * This functions checks if the window scroll is under 40 to the top windows
      * If yes, the button scrolls is shown, else not
      */
@@ -99,20 +116,12 @@ function start() {
     }
 
     /**
-     * Scroll the window to the top (0)
-     */
-    function scrollToTop() {
-        document.body.scrollTop = 0; // For Safari
-        document.documentElement.scrollTop = 0; // For Chrome, Firefox, IE and Opera
-    }
-
-    /**
      * =======================================
      * END LISTENERS AND FUNCTIONS FOR WINDOWS SCROLL
      * =======================================
      */
 
-     
+
     /**
     * =======================================
     * LISTENERS AND FUNCTIONS FOR MENU
@@ -138,12 +147,17 @@ function start() {
         var subnav = document.getElementById('subnav');
         subnav.classList.toggle('active');
     }
-
     /**
     * =======================================
     * ENDLISTENERS AND FUNCTIONS FOR MENU
     * =======================================
     */
+
+    // Twittear button function
+    var twittearButton = document.getElementById('twittear');
+    twittearButton.addEventListener('click', () => {
+        document.getElementById('write-tweet').focus();
+    });
 
 
     /**
@@ -548,5 +562,5 @@ function start() {
                 // Update the tweet with the updated field
                 updateTweet(myTweet.tweet);
             });
-    }
+        }
 }

@@ -199,12 +199,17 @@ var userController = {
         }
     },
 
+    /**
+     * METHOD: GET
+     * Obtain the user using the url param request
+     * @param {*} req 
+     * @param {*} res 
+     */
     getUserByUserName: function (req, res) {
-        console.log(req.params.user)
         var userName = req.params.user;
 
-        user_Model.findOne({ user: userName}, function (err, usuario) {
-            if (err) {
+        user_Model.findOne({ user: userName}, (err, userFound) => {
+            if (err || !userFound) {
                 return res.status(500).send({
                     status: 'Failed',
                     message: 'Usuario no encontrado',
@@ -213,7 +218,7 @@ var userController = {
             return res.status(200).send({
                 status: 'Success',
                 message: 'Usuario encontrado',
-                user: usuario
+                user: userFound
             });
         });
     },

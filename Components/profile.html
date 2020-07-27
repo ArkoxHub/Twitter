@@ -4,19 +4,20 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Inicio / Twitter</title>
+    <title>Profile / Twitter</title>
     <!-- FAVICON -->
-    <link rel="icon" href="./assets/img/newfavicon.png">
+    <link rel="icon" href="../assets/img/newfavicon.png">
     <!-- My CSS -->
-    <link rel="stylesheet" href="./css/styles.css">
+    <link rel="stylesheet" href="../css/styles.css">
+    <link rel="stylesheet" href="../css/profile.css">
     <!-- Font Awesome -->
     <script src="https://kit.fontawesome.com/b400a47616.js" crossorigin="anonymous"></script>
     <!-- Moment JS -->
-    <script src="./scripts/Moment/moment.min.js"></script>
+    <script src="../scripts/Moment/moment.min.js"></script>
     <!-- JQUERY -->
-    <script src="./scripts/jQuery/jquery-3.4.1.js"></script>
+    <script src="../scripts/jQuery/jquery-3.4.1.js"></script>
     <!-- My Script-->
-    <script type="module" src="./scripts/main.js"></script>
+    <script src="../scripts/profile.js"></script>
 </head>
 
 <body>
@@ -26,16 +27,23 @@
         <header id="header">
             <nav id="menu">
                 <ul>
-                    <li><a href="./index.html"><i class="fab fa-twitter menu-icon"></i></a></li>
-                    <li><a href="#" class="menu-link"><i class="fas fa-home menu-icon"></i><span>Inicio</span></a></li>
-                    <li><a href="#" class="menu-link"><i class="fas fa-hashtag menu-icon"></i><span>Explorar</span></a></li>
-                    <li><a href="#" class="menu-link"><i class="far fa-bell menu-icon"></i><span>Notificaciones</span></a></li>
-                    <li><a href="#" class="menu-link"><i class="far fa-envelope menu-icon"></i><span>Mensajes</span></a></li>
-                    <li><a href="#" class="menu-link"><i class="far fa-bookmark menu-icon"></i><span>Guardados</span></a></li>
-                    <li><a href="#" class="menu-link"><i class="far fa-list-alt menu-icon"></i><span>Listas</span></a></li>
-                    <li><a href="./Components/profile.html" class="menu-link"><i class="fas fa-user menu-icon"></i><span>Perfil</span></a></li>
+                    <li><a href="../index.html"><i class="fab fa-twitter menu-icon"></i></a></li>
+                    <li><a href="../index.html" class="menu-link"><i
+                                class="fas fa-home menu-icon"></i><span>Inicio</span></a></li>
+                    <li><a href="#" class="menu-link"><i class="fas fa-hashtag menu-icon"></i><span>Explorar</span></a>
+                    </li>
+                    <li><a href="#" class="menu-link"><i
+                                class="far fa-bell menu-icon"></i><span>Notificaciones</span></a></li>
+                    <li><a href="#" class="menu-link"><i class="far fa-envelope menu-icon"></i><span>Mensajes</span></a>
+                    </li>
+                    <li><a href="#" class="menu-link"><i
+                                class="far fa-bookmark menu-icon"></i><span>Guardados</span></a></li>
+                    <li><a href="#" class="menu-link"><i class="far fa-list-alt menu-icon"></i><span>Listas</span></a>
+                    </li>
+                    <li><a href="#" class="menu-link"><i class="fas fa-user menu-icon"></i><span>Perfil</span></a></li>
                     <li>
-                        <a href="#" class="menu-link"><i class="fas fa-ellipsis-h menu-icon"></i><span>Más opciones</span></a>
+                        <a href="#" class="menu-link"><i class="fas fa-ellipsis-h menu-icon"></i><span>Más
+                                opciones</span></a>
                     </li>
                     <button id="twittear" class="btn-tweet">Twittear</button>
                     <button id="twittear" class="btn-tweet hidden"><i class="fas fa-feather"></i></button>
@@ -44,7 +52,7 @@
                 <div id="subnav">
                     <div><a href="#"><i class="fas fa-cog"></i>Configuración</a></div>
                     <div><a href="#"><i class="fas fa-desktop"></i>Pantalla</a></div>
-                    <div><a href="./Components/login.html"><i class="fas fa-user-times"></i>Cerrar sesión</a></div>
+                    <div><a href="./login.html"><i class="fas fa-user-times"></i>Cerrar sesión</a></div>
                 </div>
             </nav>
         </header>
@@ -54,59 +62,52 @@
         <section id="container">
             <!-- Barra inicio fixed -->
             <div class="inicio">
-                <p>Inicio</p>
-                <img id="star-image" src="./assets/img/start-transparent.png" alt="star">
+                <p>
+                    <a href="../index.html" style="color: white; text-decoration: none">
+                        <i class="fas fa-arrow-left" style="margin-right: 20px; color: dodgerblue"></i>
+                        <div id="user-info">
+                            <p id="userName"></p>
+                            <p id="total-tweets"></p>
+                        </div>
+                    </a>
+                </p>
+                <img id="star-image" src="../assets/img/start-transparent.png" alt="star">
             </div>
-            <!-- Fin inicio fixed -->
-
-            <!-- Escribir Tweet zona superior-->
-            <div id="tweet-client">
-                <div id="tweet-home">
-                    <div id="tweet-area">
-                        <img class="self-img" src="./assets/img/72efegBj_400x400.jpg" alt="foto-perfil">
-                        <form id="form-tweet" method="POST">
-                            <textarea id="write-tweet" placeholder="¿Qué está pasando?" maxlength="240"></textarea>
-                    </div>
-                    <div id="tweet-options">
-                        <ul>
-                            <li><i class="far fa-image"></i></li>
-                            <li><i class="far fa-file-image"></i></li>
-                            <li><i class="fas fa-align-left"></i></li>
-                            <li><i class="far fa-smile"></i></li>
-                        </ul>
-                        <span id="tweetLength"></span>
-                        <input id="submitTweet" type="submit" class="btn-tweet" value="Twittear" disabled />
-                        </form>
+            <div id="profile-section">
+                <div id="profile-images">
+                    <img id="header-photo" src="../assets/img/portrait.jpg" alt="background image profile">
+                    <img id="profile-photo" src="../assets/img/profile.jpg" alt="image profile">
+                </div>
+                <div id="profile-content">
+                    <button id="editButton" type="button">Editar perfil</button>
+                    <p id="content-nickname">asdf</p>
+                    <p id="content-user">asdf</p>
+                    <p id="content-bio">dkasd lkñsjdflañksj ñlkj ñlksjdfñlaksjdñlkj sdfñsldkfja sdfasdf </p>
+                    <p id="content-birthday">04/03/1991</p>
+                    <p id="content-join">Se unió en: asdfsdf</p>
+                    <div id="profile-followers">
+                        <p>Siguiendo</p>
+                        <p>Seguidores</p>
                     </div>
                 </div>
-            </div>
-            <!-- Fin Escribir Tweet zona superior-->
-
-            <!-- Chapuza -->
-            <div class="space-arround" style="width: 100%; height: 9px; background-color: #253342;"></div>
-
-            <!-- ARTICLE TWEET -->
-            <div id="articles">
-                <!-- Tweets -->
-                <!-- EXAMPLE OF TWEET BODY -->
-                <!-- <article class="tweet">
-                    <div class="profile">
-                        <img class="self-img" src="./assets/img/61ri1JvQEJL.png" alt="perfil">
-                        <p class="user-name">Popeye · </p>
-                        <span class="subtext">@Arkox 1 day ago</span>
-                        <span><i class="fas fa-times"></i></span>
+                <div id="menu-content">
+                    <div class="menu-options">
+                        Tweets
                     </div>
-                    <p class="tweetted">Do you know da wae?</p>
-                    <ul>
-                        <li><i class="far fa-comment"></i></li>
-                        <li><i class="fas fa-retweet"></i></li>
-                        <li><i class="far fa-heart"></i></li>
-                        <li><i class="fas fa-upload"></i></li>
-                    </ul>
-                </article> -->
-                <!-- END EXAMPLE OF TWEET BODY -->
-                <!-- Fin Tweets -->
-            </div>
+                    <div class="menu-options">
+                        Tweets y respuestas
+                    </div>
+                    <div class="menu-options">
+                        Fotos y vídeos
+                    </div>
+                    <div class="menu-options">
+                        Me gusta
+                    </div>
+                </div>
+                <!-- Fin inicio fixed -->
+                <div id="articles">
+                    <!-- Tweet -->
+                </div>
         </section>
         <!-- Fin zona central -->
 

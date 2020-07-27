@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Inicio / Twitter</title>
+    <title>Tweet</title>
     <!-- FAVICON -->
     <link rel="icon" href="../assets/img/newfavicon.png">
     <!-- My CSS -->
@@ -16,7 +16,7 @@
     <!-- JQUERY -->
     <script src="../scripts/jQuery/jquery-3.4.1.js"></script>
     <!-- My Script-->
-    <script src="../scripts/tweet.js"></script>
+    <script type="module" src="../scripts/tweet.js"></script>
 </head>
 
 <body>
@@ -26,24 +26,26 @@
         <header id="header">
             <nav id="menu">
                 <ul>
-                    <li><a href="#"><i class="fab fa-twitter menu-icon"></i></a></li>
-                    <li><a href="#" class="menu-link"><i class="fas fa-home menu-icon"></i><span>Inicio</span></a></li>
-                    <li><a href="#" class="menu-link"><i class="fas fa-hashtag menu-icon"></i><span>Explorar</span></a>
+                    <li><a href="../index.html"><i class="fab fa-twitter menu-icon"></i></a></li>
+                    <li><a href="../index.html" class="menu-link"><i class="fas fa-home menu-icon"></i><span>Inicio</span></a></li>
+                    <li><a href="#" class="menu-link"><i class="fas fa-hashtag menu-icon"></i><span>Explorar</span></a></li>
+                    <li><a href="#" class="menu-link"><i class="far fa-bell menu-icon"></i><span>Notificaciones</span></a></li>
+                    <li><a href="#" class="menu-link"><i class="far fa-envelope menu-icon"></i><span>Mensajes</span></a></li>
+                    <li><a href="#" class="menu-link"><i class="far fa-bookmark menu-icon"></i><span>Guardados</span></a></li>
+                    <li><a href="#" class="menu-link"><i class="far fa-list-alt menu-icon"></i><span>Listas</span></a></li>
+                    <li><a href="./profile.html" class="menu-link"><i class="fas fa-user menu-icon"></i><span>Perfil</span></a></li>
+                    <li>
+                        <a href="#" class="menu-link"><i class="fas fa-ellipsis-h menu-icon"></i><span>Más opciones</span></a>
                     </li>
-                    <li><a href="#" class="menu-link"><i
-                                class="far fa-bell menu-icon"></i><span>Notificaciones</span></a></li>
-                    <li><a href="#" class="menu-link"><i class="far fa-envelope menu-icon"></i><span>Mensajes</span></a>
-                    </li>
-                    <li><a href="#" class="menu-link"><i
-                                class="far fa-bookmark menu-icon"></i><span>Guardados</span></a></li>
-                    <li><a href="#" class="menu-link"><i class="far fa-list-alt menu-icon"></i><span>Listas</span></a>
-                    </li>
-                    <li><a href="#" class="menu-link"><i class="fas fa-user menu-icon"></i><span>Perfil</span></a></li>
-                    <li><a href="#" class="menu-link"><i class="fas fa-ellipsis-h menu-icon"></i><span>Más
-                                opciones</span></a></li>
                     <button id="twittear" class="btn-tweet">Twittear</button>
                     <button id="twittear" class="btn-tweet hidden"><i class="fas fa-feather"></i></button>
                 </ul>
+                <!-- This section works as extension of nav when user clicks on "More Options" nav menu -->
+                <div id="subnav">
+                    <div><a href="#"><i class="fas fa-cog"></i>Configuración</a></div>
+                    <div><a href="#"><i class="fas fa-desktop"></i>Pantalla</a></div>
+                    <div><a href="./login.html"><i class="fas fa-user-times"></i>Cerrar sesión</a></div>
+                </div>
             </nav>
         </header>
         <!-- Fin barra lateral navegación -->

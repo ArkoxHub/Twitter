@@ -1,22 +1,17 @@
 'use strict'
 
-// window.onload = function () {
-//     console.log('Hello friend');
-// }
-
 $(document).ready(function () {
     console.log('Hello friend');
 
+    // Guardamos el usuario logueado
+    var userLogged = {}
+
+    checkUser();
+
     // Get URL params values
     const queryString = window.location.search;
-    console.log(queryString);
-
     const ulrParams = new URLSearchParams(queryString);
-    console.log(ulrParams)
-
     const idParam = ulrParams.get('id');
-    console.log(idParam);
-
     if (idParam) {
         $.ajax({
             method: 'get',
@@ -40,6 +35,38 @@ $(document).ready(function () {
         console.log(error, statusText);
     }
 
+    function checkUser() {
+        var username = localStorage.getItem('twitter-username');
+        var pwd = localStorage.getItem('twitter-password');
+
+        if (username && pwd) {
+            $.ajax({
+                method: 'post',
+                url: 'http://localhost:3000/user/login',
+                data: {
+                    user: username,
+                    password: pwd
+                },
+                datatype: 'json',
+                success: userResponse,
+                error: function () {
+                    alert('Servidor caído. Inténtelo de nuevo más tarde.')
+                }
+            });
+        } else {
+            window.location = 'http://127.0.0.1:5500/Components/login.html';
+        }
+
+    }
+
+    function userResponse(data) {
+        if (data.status === 'Success') {
+            userLogged = data.user[0];
+        } else {
+            window.location = 'http://127.0.0.1:5500/Components/login.html';
+        }
+    }
+
     function getTweetByID(id_Tweet) {
         $.ajax({
             method: 'get',
@@ -50,6 +77,12 @@ $(document).ready(function () {
         });
     }
 
+    /**
+         * Función que recibe por parámetro un mensaje 200 de un Tweet
+         * correctamente guardado en la Base de Datos y lo inserta (prepend) al
+         * principio del TimeLine del usuario
+         * @param {*} dades 
+         */
     function appendTweet(dades) {
         // Contenedor ref para append
         var articles = document.getElementById('articles');
@@ -57,7 +90,7 @@ $(document).ready(function () {
         // Contenedor general del artículo
         var article = document.createElement('article');
         article.classList.add('tweet');
-        article.classList.add(dades._id);
+        article.setAttribute('id', dades._id);
 
         // Primer bloque
         var div = document.createElement('div');
@@ -91,7 +124,6 @@ $(document).ready(function () {
 
         // Segundo bloque
         var ul = document.createElement('ul');
-
         var li1 = document.createElement('li');
         var li2 = document.createElement('li');
         var li3 = document.createElement('li');
@@ -100,16 +132,28 @@ $(document).ready(function () {
         var i1 = document.createElement('i');
         i1.classList.add('far');
         i1.classList.add('fa-comment');
-        
+
         var i2 = document.createElement('i');
         i2.classList.add('fas');
         i2.classList.add('fa-retweet');
+        i2.classList.add('tweet-retweet');
+        if (dades.total_Retweets > 0) {
+            i2.textContent = ' ' + dades.total_Retweets;
+        }
+        if (userLogged.tweets_Retweet.includes(dades._id)) {
+            i2.classList.add('user-retweet');
+        }
 
         var i3 = document.createElement('i');
         i3.classList.add('fas');
         i3.classList.add('fa-heart');
         i3.classList.add('tweet-like');
-        i3.addEventListener('click', likeComment);
+        if (dades.total_Likes > 0) {
+            i3.textContent = ' ' + dades.total_Likes
+        }
+        if (userLogged.tweets_Likes.includes(dades._id)) {
+            i3.classList.add('user-like');
+        }
 
         var i4 = document.createElement('i');
         i4.classList.add('fas');
@@ -139,18 +183,308 @@ $(document).ready(function () {
             redirectToTweet(dades);
         });
 
+        i2.addEventListener('click', updateUserInteractivity);
+        i3.addEventListener('click', updateUserInteractivity);
+
+
         // Final append
         articles.prepend(article);
     }
 
-    function likeComment(event) {
-        event.preventDefault();
+    /**
+ * Listener que pregunta si el usuario quiere eliminar el tweet
+ * definitivamente o no.
+ * Si es que sí, envía la petición al servidor
+ * @param {*} id 
+ */
+    function deleteTweet(id) {
         event.stopPropagation();
-        var tweet_ID = this.parentNode.parentNode.parentNode.classList[1];
+
+        var confirmDelete = confirm('Quieres eliminar el tweet?');
+
+        if (confirmDelete) {
+            $.ajax({
+                method: 'delete',
+                url: 'http://localhost:3000/tweet/' + id,
+                dataType: 'json',
+                success: showDeleteConfirmation,
+                error: showError
+            });
+        }
     }
 
-    function receiveTweet(data) {
-        
+    /**
+     * A través del ID obtiene el Tweet encontrado
+     * 
+     * @param {String} id_Tweet ID del Tweet a obtener
+     */
+    function getTweetByID(id_Tweet) {
+        $.ajax({
+            method: 'get',
+            url: 'http://localhost:3000/tweet/' + id_Tweet,
+            datatype: 'json',
+            success: function (data) { return data },
+            error: showError
+        });
     }
+
+    /**
+     * Modify the tweet object of the param in backend
+     * 
+     * @param {Object} tweet 
+     */
+    function updateTweet(tweetToUpdate) {
+        $.ajax({
+            method: 'put',
+            url: 'http://localhost:3000/tweet/update',
+            datatype: 'json',
+            data: {
+                tweet: tweetToUpdate
+            },
+            success: updateTweetDOM,
+            error: showError
+        });
+    }
+
+    /**
+     * Receive the Tweet object found in backend and update the Tweet in DOM
+     * @param {Object} data Tweet Object
+     */
+    function updateTweetDOM(data) {
+        let nodeRetweet = document.getElementById(data.tweet._id).getElementsByClassName('tweet-retweet')[0];
+        let nodeLike = document.getElementById(data.tweet._id).getElementsByClassName('tweet-like')[0];
+        let totalRetweets = data.tweet.total_Retweets;
+        let totalLikes = data.tweet.total_Likes
+        if (totalRetweets === 0) {
+            nodeRetweet.textContent = ' ';
+        } else {
+            nodeRetweet.textContent = ' ' + totalRetweets;
+        }
+        if (totalLikes === 0) {
+            nodeLike.textContent = ' ';
+        } else {
+            nodeLike.textContent = ' ' + totalLikes;
+        }
+    }
+
+    /**
+     * Call the server function to update an exist user through the param user
+     * 
+     * @param {*} user UserModel Object
+     */
+    function updateUser(userToUpdate) {
+        $.ajax({
+            method: 'put',
+            url: 'http://localhost:3000/user/update',
+            datatype: 'json',
+            data: {
+                user: userToUpdate
+            },
+            success: updateUserVar,
+            error: showError
+        });
+    }
+
+    /**
+     * Receive the response 200 from the server with the user updated
+     * and save it on this file
+     * @param {Object} User 
+     */
+    function updateUserVar(data) {
+        userLogged = data.user;
+    }
+
+    /**
+     * Muestra confirmación para que el usuario elimine o no un Tweet y
+     * si acepta, lo elimina del documento
+     * @param {*} data 
+     */
+    function showDeleteConfirmation(data) {
+        var article = document.getElementsByClassName(data.tweet._id);
+        article[0].parentNode.removeChild(article[0]);
+    }
+
+    /**
+     * When user click the retweet or heart icon of a tweet
+     * this function update the user and the tweet
+     * @param {*} event 
+     */
+    function updateUserInteractivity(event) {
+        event.preventDefault();
+        event.stopPropagation();
+
+        var tweet_ID = this.parentNode.parentNode.parentNode.id;
+
+        // Check which class have the element clicked by user
+        if (this.classList.contains('tweet-like')) {
+            checkUserHasItem(tweet_ID, this, 'like');
+        }
+        if (this.classList.contains('tweet-retweet')) {
+            checkUserHasItem(tweet_ID, this, 'retweet');
+        }
+
+        // Updates
+        updateUser(userLogged);
+    }
+
+
+    /**
+     * Check if the User Loged has already liked or retweeted the clicked event
+     * then updating user and tweet depending on the result
+     * 
+     * @param {String} tweet_ID ID of Tweet
+     * @param {Node} element Node element where user clicked
+     * @param {String} action Substract of classlist action of Element
+     */
+    function checkUserHasItem(tweet_ID, element, action) {
+
+        // Checks for Likes
+        if (action === 'like') {
+            if (userLogged.tweets_Likes.includes(tweet_ID)) {
+                var index = userLogged.tweets_Likes.indexOf(tweet_ID);
+                if (index > -1) {
+                    userLogged.tweets_Likes.splice(index, 1);
+                    element.classList.remove('user-like');
+                }
+                modifyTweet(tweet_ID, element, '-');
+            } else {
+                userLogged.tweets_Likes.push(tweet_ID);
+                modifyTweet(tweet_ID, element, '+');
+                element.classList.add('user-like');
+            }
+        }
+
+        // Checks for Retweets
+        if (action === 'retweet') {
+            if (userLogged.tweets_Retweet.includes(tweet_ID)) {
+                var index = userLogged.tweets_Retweet.indexOf(tweet_ID);
+                if (index > -1) {
+                    userLogged.tweets_Retweet.splice(index, 1);
+                    modifyTweet(tweet_ID, element, '-');
+                    element.classList.remove('user-retweet');
+                }
+            } else {
+                userLogged.tweets_Retweet.push(tweet_ID);
+                modifyTweet(tweet_ID, element, '+');
+                element.classList.add('user-retweet');
+            }
+        }
+
+    }
+
+    /**
+     * Update tweet increasing or decreasing quanity of likes or retweets
+     * @param {String} tweetID String of the Tweet Document to update
+     * @param {*} element Element of DOM with the class to change
+     * @param {*} action '+' to increase, '-' to decrease
+     */
+    function modifyTweet(tweetID, element, action) {
+        fetch('http://localhost:3000/tweet/' + tweetID)
+            .then(function (response) {
+                return response.json()
+            })
+            .then(function (myTweet) {
+                if (element.classList.contains('tweet-like')) {
+                    if (action === '+') {
+                        myTweet.tweet.total_Likes++;
+                    }
+                    if (action === '-') {
+                        myTweet.tweet.total_Likes--;
+                    }
+                }
+                if (element.classList.contains('tweet-retweet')) {
+                    if (action === '+') {
+                        myTweet.tweet.total_Retweets++;
+                    }
+                    if (action === '-') {
+                        myTweet.tweet.total_Retweets--;
+                    }
+                }
+
+                // Update the tweet with the updated field
+                updateTweet(myTweet.tweet);
+            });
+
+    }
+    /**
+    * =======================================
+    * LISTENERS AND FUNCTIONS FOR MENU
+    * =======================================
+    */
+    var moreOptionsNode = document.querySelector('#menu ul li:nth-child(9)');
+    moreOptionsNode.addEventListener('click', showSubMenu);
+
+    /**
+     * Change the icon when the submenu is shown
+     * Show the submenu when user clicks on "Más opciones"
+     */
+    function showSubMenu() {
+        var icon = moreOptionsNode.childNodes[1].childNodes[0];
+        if (icon.classList.contains('fa-ellipsis-h')) {
+            icon.classList.remove('fa-ellipsis-h')
+            icon.classList.add('fa-chevron-up')
+        } else {
+            icon.classList.add('fa-ellipsis-h')
+            icon.classList.remove('fa-chevron-up')
+        }
+
+        var subnav = document.getElementById('subnav');
+        subnav.classList.toggle('active');
+    }
+    /**
+    * =======================================
+    * ENDLISTENERS AND FUNCTIONS FOR MENU
+    * =======================================
+    */
+
+    /**
+     * =======================================
+     * LISTENER AND FUNCTION FOR WINDOW SCROLL
+     * =======================================
+     */
+
+    // Listener Scroll Window
+    window.onscroll = function () {
+        scrollFunction();
+    }
+
+    // Listener Scroll Button
+    var button_top = document.getElementById("scroll-button");
+    button_top.addEventListener('click', scrollTo(document.documentElement, 0, 1250));
+
+    var toTop = document.getElementById("scroll-button");
+    toTop.addEventListener("click", () => { scrollToTop(100) });
+
+    /**
+     * 
+     * @param {Number} scrollDuration ms to scroll to top
+     */
+    function scrollToTop(scrollDuration) {
+        var scrollStep = -window.scrollY / (scrollDuration / 15),
+            scrollInterval = setInterval(function () {
+                if (window.scrollY != 0) {
+                    window.scrollBy(0, scrollStep);
+                }
+                else clearInterval(scrollInterval);
+            }, 15);
+    }
+
+    /**
+     * This functions checks if the window scroll is under 40 to the top windows
+     * If yes, the button scrolls is shown, else not
+     */
+    function scrollFunction() {
+        if (document.body.scrollTop > 40 || document.documentElement.scrollTop > 40) {
+            button_top.style.display = "block";
+        } else {
+            button_top.style.display = "none";
+        }
+    }
+
+    /**
+     * =======================================
+     * END LISTENERS AND FUNCTIONS FOR WINDOWS SCROLL
+     * =======================================
+     */
 
 });

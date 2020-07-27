@@ -37,6 +37,9 @@ body {
     align-items: flex-end;
     flex-grow: 2;
     padding-right: 15px;
+    position: fixed;
+    left: 12%;
+    z-index: 10;
 }
 
 #header #logo {
@@ -52,6 +55,10 @@ body {
     padding: 10px;
 }
 
+#menu ul li:nth-child(1) {
+    width: 35px;
+}
+
 #menu ul li:hover {
     border-radius: 3em;
     background-color: var(--main-li-hover-color);
@@ -60,13 +67,14 @@ body {
 
 #menu ul li i {
     width: 50px;
+    font-size: 25px;
 }
 
 #menu ul li a {
     text-decoration: none;
     color: white;
     font-size: 21px;
-    font-weight: 800;
+    font-weight: 700;
 }
 
 #menu ul li:hover a {
@@ -157,6 +165,9 @@ body {
     border-left: 1px solid var(--border-color);
     border-right: 1px solid var(--border-color);
     min-height: 1200px;
+    margin-left: 30%;
+    position: relative;
+    z-index: 1;
 }
 
 #container .inicio {
@@ -164,9 +175,9 @@ body {
     flex-flow: row wrap;
     justify-content: space-between;
     
-    position: relative;
     height: 50px;
-    border-bottom: 1px solid var(--border-color)
+    background-color: var(--main-color);
+    border-bottom: 1px solid var(--border-color);
 }
 
 #container .inicio:hover {
@@ -480,6 +491,7 @@ body {
 /* FOOTER */
 #footer {
     display: inline-block;
+    margin-top: 20px;
 }
 
 #footer ul {
@@ -508,9 +520,10 @@ body {
     line-height: 50px;
     display: block;
     position: fixed;
-    margin-left: 95%;
-    margin-top: 50%;
+    bottom: 0;
+    right: 0;
     opacity: 0.8;
+    z-index: 10;
 }
 
 #scroll-top #scroll-button {
@@ -522,7 +535,6 @@ body {
     border: none;
     font-size: 20px;
     color: rgba(238, 229, 229, 0.863);
-    z-index: 99;
 }
 
 #scroll-top #scroll-button:hover {
@@ -539,47 +551,33 @@ body {
 
 
 
-@media only screen and (min-width: 2550px) {
-
-    #scroll-top {
-        margin-top: 45%;
-    }
-}
-
-@media only screen and (max-width: 1550px) {
-
+/* MEDIA QUERIES */
+@media screen and (max-width: 1550px) {
     #write-tweet {
         width: 380px;
     }
 }
 
-@media only screen and (max-width: 1500px) {
-
-    #scroll-top {
-        margin-top: 60%;
-    }
-}
-
-@media only screen and (max-width: 1200px) {
-
-    #scroll-top {
-        margin-top: 70%;
-    }
-}
-
-@media only screen and (max-width: 1100px) {
-
-    #scroll-top {
+@media screen and (max-width: 1377px) {
+    #aside {
         display: none;
     }
-}
-
-@media only screen and (max-width: 1075px) {
 
     #header {
-        align-items: center;
-        flex-grow: 1;
-        padding-right: 0px;
+        left: 3rem;
+    }
+
+    #container {
+        margin-left: 300px;
+    }
+}
+@media screen and (max-width: 1135px) {
+    #container {
+        margin-left: 83px;
+    }
+
+    #header {
+        left: 0rem;
     }
 
     .menu-link > span {
@@ -616,13 +614,32 @@ body {
     }
 }
 
-@media only screen and (max-width: 950px) {
+@media screen and (max-width: 950px) {
     #header {
         flex-grow: 0.1;
+        max-width: none;
     }
 }
 
-@media only screen and (max-width: 640px) {
+@media screen and (max-width: 640px) {
+
+    #scroll-top {
+        display: none;
+    }
+
+    #header {
+        left: 0px;
+        background-color: red;
+    }
+
+    #menu {
+        background-color: var(--main-color);
+    }
+
+    #container {
+        width: 100%;
+        margin-left: 0px !important;
+    }
 
     #menu #subnav.active {
         display: none;
@@ -639,21 +656,28 @@ body {
 
     #menu {
         width: 100%;
+        padding: 0px;
+        margin: 0px;
         border-top: 1px solid var(--border-color);
+        position: fixed;
+        bottom: 0px;
+        z-index: 999;
     }
 
     #menu ul {
         display: flex;
         flex-flow: row wrap;
-        justify-content: space-between;
+        justify-content: space-around;
         width: 100% !important;
-        padding: 15px;
+        padding: 0px;
+        margin-top: 20px;
+        margin-bottom: 20px;
     }
 
     #menu ul li {
-        flex-grow: 1;
         margin: 0px;
         padding: 0px;
+        list-style: none;
     }
 
     #menu ul li:nth-child(5),
@@ -670,3 +694,6 @@ body {
         order: 0;
     }
 }
+/* END MEDIA QUERIES */
+
+/* END */
