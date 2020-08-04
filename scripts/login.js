@@ -59,7 +59,7 @@ window.onload = function () {
     }
 
     /**
-     * Inserta el un ElementNode pasado por parámetro después del referenciado.
+     * Inserta el ElementNode pasado por parámetro después del referenciado.
      * @param {Element} newNode nuevo que queremos inserir
      * @param {Element} refNode referéncia del nodo al que le queremos inserir
      * un nuevo elemento posterior
@@ -80,6 +80,7 @@ window.onload = function () {
         }
     }
 
+    // Validate user credentials to Log In
     function loginUser(user, password) {
         $.ajax({
             method: 'post',
@@ -132,19 +133,29 @@ window.onload = function () {
             // document.cookie = 'password=' + data.user[0].password1 + '; max-age=31536000‬; path=/'; // 1 year duration = 60 * 60 * 24 * 365
         }
 
+        // Error en user
         if (data.status === 'User') {
             var username = document.getElementById('username');
+            var password = document.getElementById('password');
+
             var error = createAlertError('Usuario incorrecto');
+            username.focus();
+            password.value = '';
+
             insertAfter(error, username);
         }
 
+        // Error en password
         if (data.status === 'Password') {
             var password = document.getElementById('password');
             var error = createAlertError('Contraseña incorrecta');
+            password.focus();
+
             insertAfter(error, password);
         }
     }
 
+    // Show error message from API Request
     function showError(jqXHR, statusText, error) {
         alert('Servidor caído, inténtelo de nuevo más tarde.\nPara más información consulta la consola.');
         console.log(error, statusText);

@@ -45,7 +45,6 @@
 /* PROFILE SECTION */
 #profile-section {
     width: 100%;
-    height: 511px;
     border-bottom: 1px solid var(--border-color);
 }
 
@@ -157,16 +156,7 @@
 /* END CONTAINER */
 
 /* MEDIA QUERIES */
-@media screen and (max-width: 2560px) {
-    #profile-section {
-        height: 556px;;
-    }
-}
 @media screen and (max-width: 1900px) {
-    #profile-section {
-        height: 511px;;
-    }
-
     #profile-images {
         height: 242px;;
     }
@@ -185,10 +175,6 @@
 }
 
 @media screen and (max-width: 1377px) {
-    #profile-section {
-        height: 690px;
-    }
-
     #profile-content {
         margin-top: 160px;
     }
@@ -203,20 +189,12 @@
 }
 
 @media screen and (max-width: 882px) {
-    #profile-section {
-        height: 580px;
-    }
-
     #profile-content {
         margin-top: 50px;
     }
 }
 
 @media screen and (max-width: 510px) {
-    #profile-section {
-        height: 562px;
-    }
-
     #editButton {
         left: 350px !important;
         top: -20px !important;
@@ -252,11 +230,7 @@
         width: 120px !important;
         font-size: 16px !important;
     }
-
-    #profile-section {
-        height: 550px;
-    }
-
+    
     #profile-content {
         margin-top: 0px;
     }

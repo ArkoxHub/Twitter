@@ -1,42 +1,79 @@
 window.onload = () => {
+    
+    // Indicates if the user who access in this URL is the user logged in or other
+    var userProfile = false;
 
-    // Load profile of userLogged or other depending if url includes string profile or not
-    if (isProfileWindow) {
-        getUser(localStorage.getItem('twitter-username'))
+    /**
+     * Get the user depending if the person who access is the user logged or other
+     */
+    if (localStorage.getItem('twitter-username')) {
+        var userName = localStorage.getItem('twitter-username');
+        getUser(userName);
+        userProfile = true;
     } else {
-        // Via Tweet Object need to substract the user name and send it as param
-        console.log('TO DO')
-        // getUser()
-    }
-
-    getUserTweets();
-
-    function getUser(user) {
-            $.ajax({
-                method: 'GET',
-                url: 'http://localhost:3000/user/'+ user,
-                datatype: 'json',
-                success: userResponse,
-                error: function () {
-                    alert('Servidor caído. Inténtelo de nuevo más tarde.')
-                }
-            });
-    }
-
-    function isProfileWindow() {
-        var url = window.location.href;
-        if (url.includes('profile')) {
-            return true;
-        } else {
-            return false;
+        try {
+            const queryString = window.location.search;
+            const ulrParams = new URLSearchParams(queryString);
+            const userParam = ulrParams.get('username');
+            getUser(userParam)
+        } catch (err) {
+            alert('Error al realizar la consulta.', console.log(err));
         }
     }
 
-    // Receive user from API Rest and print it to header
+    /**
+     * API-REST call to get the object
+     * @param {Object} user 
+     */
+    function getUser(user) {
+        $.ajax({
+            method: 'GET',
+            url: 'http://localhost:3000/user/' + user,
+            datatype: 'json',
+            success: userResponse,
+            error: function () {
+                alert('Servidor caído. Inténtelo de nuevo más tarde.')
+            }
+        });
+    }
+
+    // Receive user from API Rest and print it to header of profile main page
     function userResponse(data) {
-        var userLogged = data.user;
-        var userName = document.getElementById('userName');
-        userName.innerHTML = userLogged.nickname
+        var user = data.user;
+
+        var nicknameNodes = document.getElementsByClassName("nickname");
+        for (nick of nicknameNodes) {
+            nick.textContent = user.nickname;
+        }
+
+        var userNode = document.getElementById('content-user');
+        userNode.textContent = '@' + user.user;
+
+        if (user.bio) {
+            var bioNode = document.getElementById('content-bio');
+            bioNode.textContent = user.bio;
+        }
+
+        if (user.birthday) {
+            var birthdayNode = document.getElementById('content-birthday');
+            var birthdayDateFormated = moment(user.birthday).format('DD/MM/YYYY');
+            birthdayNode.textContent = 'Fecha de nacimiento: ' +  birthdayDateFormated;
+        }
+
+        var joinNode = document.getElementById('content-join');
+        var joinDateFormated = moment(user.creation_date).format('DD/MM/YYYY')
+        joinNode.textContent = 'Se unió el ' + joinDateFormated;
+        
+        if (user.followers.length > 0) {
+            var followersNode = document.getElementById('followers');
+            followersNode.textContent = 'Siguiendo: ' + user.followers.length;
+        }
+        
+        if (user.following.length > 0) {
+            var followingNode = document.getElementById('following');
+            followingNode.textContent = 'Seguidores: ' + user.following.length;
+        }
+
     }
 
     // Get all tweets user logged

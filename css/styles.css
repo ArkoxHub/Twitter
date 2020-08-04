@@ -18,6 +18,11 @@ body {
     background-color: var(--main-color);
 }
 
+body.modal-open {
+    height: 100vh;
+    overflow-y: hidden;
+}
+
 
 #content {
     display: flex;
@@ -228,7 +233,7 @@ body {
     margin-right: 20px;
 }
 
-#tweet-options .btn-tweet:disabled {
+.btn-tweet:disabled {
     opacity: 0.4;
     cursor: default;
 }
@@ -549,6 +554,95 @@ body {
     outline: none;
 }
 
+/* MODAL */
+#tweetModal {
+    display: none;
+    position: fixed;
+    z-index: 50;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    background-color: rgba(146, 146, 146, 0.4);
+}
+
+#tweetModal .fa-times {
+    color: red;
+    float: right;
+    font-size: 20px;
+    height: 35px;
+    width: 35px;
+    line-height: 35px;
+    border-radius: 100%;
+}
+
+#tweetModal .fa-times:before {
+    margin-left: 11px;
+}
+
+#tweetModal .fa-times:hover {
+    background-color: var(--main-li-hover-color);
+    cursor: pointer;
+}
+
+.modal-content {
+    background-color: var(--main-color);
+    border: 1px solid var(--button-color);
+    margin: 15% auto;
+    padding: 20px;
+    width: 30%;
+    border-radius: 1em;
+}
+
+#modal-response{
+    width: 100%;
+}
+
+#responseTweet {
+    width: 100%;
+}
+
+#responseText {
+    background-color: var(--main-color);
+    resize: none;
+    border: none;
+    outline: none;
+    color: white;
+    font-size: 18px;
+    width: 100%;
+    margin: 0 auto;
+    height: 200px;
+}
+
+#responeTweetLength {
+    color: white;
+    margin-top: 12px;
+}
+
+#tweet-options-response {
+    display: flex;
+    flex-flow: row wrap;
+    justify-content: space-between;
+}
+
+#tweet-options-response ul {
+    display: flex;
+    flex-flow: row wrap;
+    justify-content: space-around;
+}
+
+#tweet-options-response li {
+    list-style: none;
+    color: var(--button-color);
+    margin: 10px;
+}
+
+#submitResponseTweet {
+    width: 140px;
+    height: 45px;
+}
+/* END MODAL */
 
 
 /* MEDIA QUERIES */
@@ -646,7 +740,16 @@ body {
     }
     
     #tweet-client {
-        display: none;
+        height: 170px;
+    }
+
+    #tweet-options ul {
+        margin-left: 10px;
+    }
+
+    #write-tweet {
+        margin-top: 6px;
+        width: 100%;
     }
 
     #header {
@@ -661,7 +764,7 @@ body {
         border-top: 1px solid var(--border-color);
         position: fixed;
         bottom: 0px;
-        z-index: 999;
+        z-index: 20;
     }
 
     #menu ul {
@@ -684,8 +787,7 @@ body {
     #menu ul li:nth-child(6),
     #menu ul li:nth-child(7),
     #menu ul li:nth-child(8),
-    #menu ul li:nth-child(9),
-    .btn-tweet {
+    #menu ul li:nth-child(9) {
         display: none;
     }
 

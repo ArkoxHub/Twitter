@@ -2,6 +2,9 @@
 
 // Global variables
 const tweet_MaxLength = 240;
+const modal = document.getElementById('tweetModal');
+const closeModal = document.getElementById('closeModal');
+
 
 // Guardamos el usuario logueado
 var userLogged = {}
@@ -12,6 +15,19 @@ moment.locale('es')
 
 window.onload = function () {
     console.log("Hi friend");
+
+    window.addEventListener('click', event => {
+        if (event.target == modal) {
+            document.body.classList.remove('modal-open');
+            modal.style.display = 'none';
+        }
+    });
+
+    closeModal.addEventListener('click', () => {
+        document.body.classList.remove('modal-open');
+        modal.style.display = 'none';
+    });
+
 
     checkUser();
     function checkUser() {
@@ -73,7 +89,7 @@ function start() {
 
     /**
      * =======================================
-     * LISTENER AND FUNCTION FOR WINDOW SCROLL
+     * LISTENER AND FUNCTIONS FOR WINDOW SCROLL
      * =======================================
      */
 
@@ -103,10 +119,10 @@ function start() {
             }, 15);
     }
 
-        /**
-     * This functions checks if the window scroll is under 40 to the top windows
-     * If yes, the button scrolls is shown, else not
-     */
+    /**
+ * This functions checks if the window scroll is under 40 to the top windows
+ * If yes, the button scrolls is shown, else not
+ */
     function scrollFunction() {
         if (document.body.scrollTop > 40 || document.documentElement.scrollTop > 40) {
             button_top.style.display = "block";
@@ -217,6 +233,22 @@ function start() {
             $('#submitTweet').prop('disabled', false);
             $('#tweetLength').show();
             $('#tweetLength').text($totalWords + " / " + tweet_MaxLength)
+                .css({
+                    'color': 'white'
+                });
+        }
+    });
+
+    $('#responseText').on('keydown keyup', function (event) {
+        var $totalWords = $('#responseText').val().length;
+
+        if ($totalWords === 0) {
+            $('#responeTweetLength').hide();
+            $('#submitResponseTweet').prop('disabled', true);
+        } else {
+            $('#submitResponseTweet').prop('disabled', false);
+            $('#responeTweetLength').show();
+            $('#responeTweetLength').text($totalWords + " / " + tweet_MaxLength)
                 .css({
                     'color': 'white'
                 });
@@ -336,6 +368,7 @@ function start() {
             redirectToTweet(dades);
         });
 
+        i1.addEventListener('click', showModal);
         i2.addEventListener('click', updateUserInteractivity);
         i3.addEventListener('click', updateUserInteractivity);
 
@@ -412,7 +445,7 @@ function start() {
         let nodeRetweet = document.getElementById(data.tweet._id).getElementsByClassName('tweet-retweet')[0];
         let nodeLike = document.getElementById(data.tweet._id).getElementsByClassName('tweet-like')[0];
         let totalRetweets = data.tweet.total_Retweets;
-        let totalLikes = data.tweet.total_Likes
+        let totalLikes = data.tweet.total_Likes;
         if (totalRetweets === 0) {
             nodeRetweet.textContent = ' ';
         } else {
@@ -426,9 +459,9 @@ function start() {
     }
 
     /**
-     * Call the server function to update an exist user through the param user
+     * Call the server function to update an existing user through the user param
      * 
-     * @param {*} user UserModel Object
+     * @param {Object} user UserModel Object
      */
     function updateUser(userToUpdate) {
         $.ajax({
@@ -562,5 +595,22 @@ function start() {
                 // Update the tweet with the updated field
                 updateTweet(myTweet.tweet);
             });
-        }
+    }
+
+    /**
+    * =======================================
+    * MODAL FUNCTIONS
+    * =======================================
+    */
+
+    /**
+     * Show modal
+     * @param {*} event 
+     */
+    function showModal(event) {
+        event.stopPropagation();
+        document.body.classList.add('modal-open');
+        modal.style.display = 'block';
+        responseText.focus();
+    }
 }
