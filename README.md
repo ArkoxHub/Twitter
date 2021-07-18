@@ -25,16 +25,7 @@ Distribución del arbol del proyecto:
   - READEm.md
 
 Requerimientos para usar el proyecto y desarrollar con él:
-- Lenguaje de programación: Javascript
-- Backend: NodeJS
-  - Las dependencias necesarias a instalar son (las versiones que muestro son las que uso yo actualmente y funcionan correctamente):
-    "body-parser": "^1.19.0",
-    "cookie-parser": "^1.4.5",
-    "express": "^4.17.1",
-    "moment": "^2.24.0",
-    "mongoose": "^5.9.5",
-    "validator": "^13.0.0"
-    "nodemon": "^2.0.2"
+npm install para cargar todas las dependencias del proyecto necesarias para el correcto funcionamiento.
 
 - Base de datos: MongoDB
   - Para que funcione el programa en local, deberás crear una base de datos MongoDB en tu localhost llamada 'Twitter'.
